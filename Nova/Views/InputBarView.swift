@@ -9,29 +9,39 @@ import SwiftUI
 
 struct InputBarView: View {
     @Binding var currentInput: String
-    @FocusState private var isTextFieldFocused: Bool
+    @State private var textHeight: CGFloat = 22
     let onSend: () -> Void
     
     var body: some View {
         HStack(spacing: 12) {
-            TextField("Ask Nova anything...", text: $currentInput, axis: .vertical)
-                .textFieldStyle(.plain)
-                .font(.system(size: 15))
-                .lineLimit(1...8)
-                .focused($isTextFieldFocused)
-                .onSubmit {
-                    onSend()
+            ZStack(alignment: .topLeading) {
+                if currentInput.isEmpty {
+                    Text("Ask Nova anything...")
+                        .foregroundColor(AppColors.secondaryText)
+                        .font(.system(size: 15))
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .allowsHitTesting(false)
                 }
+                
+                GrowingTextView(
+                    text: $currentInput,
+                    height: $textHeight,
+                    onSend: onSend
+                )
+                .focusable()
+                .frame(height: textHeight)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(AppColors.textFieldBackground)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(AppColors.textFieldBorder, lineWidth: 1)
-                        )
-                )
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(AppColors.textFieldBackground)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(AppColors.textFieldBorder, lineWidth: 1)
+                    )
+            )
             
             Button(action: onSend) {
                 Image(systemName: "arrow.up.circle.fill")
@@ -44,9 +54,6 @@ struct InputBarView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
         .background(AppColors.background)
-        .onAppear {
-            isTextFieldFocused = true
-        }
     }
 }
 
