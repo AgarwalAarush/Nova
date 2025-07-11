@@ -1,0 +1,101 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.lock
+*.tmp
+*.bak
+
+# Xcode
+build/
+DerivedData/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+
+# Xcode Workspace
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcscmblueprint
+
+# Xcode Schemes
+# Keep shared schemes (in xcshareddata), ignore user ones
+*.xcodeproj/xcuserdata/*
+*.xcworkspace/xcuserdata/*
+
+# Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+.idea/
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# CocoaPods
+Pods/
+Podfile.lock
+*.xcworkspace
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Bundler
+.bundle
+
+# SPM checkouts (older)
+.checkouts/
+
+# Archives
+*.xcarchive
+
+# Crashlytics / Firebase
+*.dSYM.zip
+*.dSYM
+
+# Logs
+*.log
+
+# XCAssets compiled (if manually built)
+*.car
+
+# Other IDEs
+.idea/
+.vscode/
+
+# Temporary files
+*.orig
+*.rej
+*~.nib
+*~.xib
+*.sw?
+
+# Lockfiles
+.yarn.lock
+package-lock.json
+
+# Misc
+*.map
+.env
+.env.*
+
+# If using Git LFS (optional)
+*.psd
+*.ai
+*.sketch
