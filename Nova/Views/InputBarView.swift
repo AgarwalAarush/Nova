@@ -17,7 +17,7 @@ struct InputBarView: View {
             TextField("Ask Nova anything...", text: $currentInput, axis: .vertical)
                 .textFieldStyle(.plain)
                 .font(.system(size: 15))
-                .lineLimit(1...4)
+                .lineLimit(1...8)
                 .focused($isTextFieldFocused)
                 .onSubmit {
                     onSend()
@@ -49,3 +49,6 @@ struct InputBarView: View {
         }
     }
 }
+
+
+
