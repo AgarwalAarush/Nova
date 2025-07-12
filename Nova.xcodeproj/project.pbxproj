@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9B06C9752E2178F8003B7661 /* SwiftWhisper in Frameworks */ = {isa = PBXBuildFile; productRef = 9B06C9742E2178F8003B7661 /* SwiftWhisper */; };
+		9B06C97C2E218CDC003B7661 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 9B06C97B2E218CDC003B7661 /* Markdown */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9B06C92B2E206B30003B7661 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B06C9752E2178F8003B7661 /* SwiftWhisper in Frameworks */,
+				9B06C97C2E218CDC003B7661 /* Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +119,8 @@
 			);
 			name = Nova;
 			packageProductDependencies = (
+				9B06C9742E2178F8003B7661 /* SwiftWhisper */,
+				9B06C97B2E218CDC003B7661 /* Markdown */,
 			);
 			productName = Nova;
 			productReference = 9B06C9172E206B2E003B7661 /* Nova.app */;
@@ -195,6 +204,10 @@
 			);
 			mainGroup = 9B06C90E2E206B2E003B7661;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9B06C9732E2178F8003B7661 /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
+				9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9B06C9182E206B2E003B7661 /* Products */;
 			projectDirPath = "";
@@ -551,6 +564,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9B06C9732E2178F8003B7661 /* XCRemoteSwiftPackageReference "SwiftWhisper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exPHAT/SwiftWhisper.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftlang/swift-markdown.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9B06C9742E2178F8003B7661 /* SwiftWhisper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B06C9732E2178F8003B7661 /* XCRemoteSwiftPackageReference "SwiftWhisper" */;
+			productName = SwiftWhisper;
+		};
+		9B06C97B2E218CDC003B7661 /* Markdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */;
+			productName = Markdown;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B06C90F2E206B2E003B7661 /* Project object */;
 }

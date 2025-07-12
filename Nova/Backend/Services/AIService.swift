@@ -14,6 +14,15 @@ protocol AIService {
     var currentModel: String { get set }
 }
 
+protocol AudioTranscriptionService {
+    func transcribeAudio(input: WhisperAudioInput, request: WhisperTranscriptionRequest) async throws -> WhisperTranscriptionResponse
+    func downloadModel(_ modelSize: WhisperConfiguration.ModelSize) async throws
+    func isModelAvailable(_ modelSize: WhisperConfiguration.ModelSize) -> Bool
+    func getModelStatus(_ modelSize: WhisperConfiguration.ModelSize) -> WhisperModelStatus
+    var availableModels: [WhisperConfiguration.ModelSize] { get }
+    var currentModel: WhisperConfiguration.ModelSize { get set }
+}
+
 enum AIServiceError: Error, LocalizedError {
     case networkError(Error)
     case invalidResponse
@@ -21,6 +30,11 @@ enum AIServiceError: Error, LocalizedError {
     case rateLimited
     case serverError(Int)
     case decodingError(Error)
+    // Audio transcription specific errors
+    case audioProcessingFailed(Error)
+    case modelDownloadFailed(Error)
+    case audioFormatUnsupported
+    case audioTooLong
     
     var errorDescription: String? {
         switch self {
@@ -36,6 +50,14 @@ enum AIServiceError: Error, LocalizedError {
             return "Server error with code: \(code)"
         case .decodingError(let error):
             return "Failed to decode response: \(error.localizedDescription)"
+        case .audioProcessingFailed(let error):
+            return "Audio processing failed: \(error.localizedDescription)"
+        case .modelDownloadFailed(let error):
+            return "Model download failed: \(error.localizedDescription)"
+        case .audioFormatUnsupported:
+            return "Audio format is not supported"
+        case .audioTooLong:
+            return "Audio duration exceeds maximum limit"
         }
     }
 }

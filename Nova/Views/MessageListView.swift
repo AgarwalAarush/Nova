@@ -23,11 +23,22 @@ struct MessageListView: View {
                 .padding(.vertical, 16)
             }
             .onChange(of: messages.count) { _ in
-                if let lastMessage = messages.last {
-                    withAnimation(.easeOut(duration: 0.3)) {
-                        proxy.scrollTo(lastMessage.id, anchor: .bottom)
-                    }
-                }
+                scrollToBottom(proxy)
+            }
+            .onChange(of: streamingMessageContent) { _ in
+                scrollToBottom(proxy)
+            }
+        }
+    }
+    
+    private var streamingMessageContent: String {
+        messages.first { $0.isStreaming }?.content ?? ""
+    }
+    
+    private func scrollToBottom(_ proxy: ScrollViewProxy) {
+        if let lastMessage = messages.last {
+            withAnimation(.easeOut(duration: 0.3)) {
+                proxy.scrollTo(lastMessage.id, anchor: .bottom)
             }
         }
     }
@@ -54,7 +65,7 @@ struct UserMessageView: View {
     
     var body: some View {
         Text(message.content)
-            .font(.system(size: 15, weight: .regular))
+            .font(AppFonts.messageBody)
             .foregroundColor(.white)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -75,11 +86,8 @@ struct AIMessageView: View {
                 // Typing indicator for empty/streaming messages
                 TypingIndicator()
             } else {
-                Text(LocalizedStringKey(message.content))
-                    .font(.system(size: 15, weight: .regular))
-                    .foregroundColor(.primary)
+                MarkdownText(content: message.content)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
             }
         }
     }

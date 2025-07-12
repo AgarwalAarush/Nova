@@ -15,7 +15,10 @@ struct ChatView: View {
             MessageListView(messages: viewModel.messages)
             InputBarView(
                 currentInput: $viewModel.currentInput,
-                onSend: viewModel.sendMessage
+                onSend: viewModel.sendMessage,
+                onDictationToggle: viewModel.toggleDictation,
+                isDictating: viewModel.isDictating,
+                isTranscribing: viewModel.isTranscribing
             )
         }
     }

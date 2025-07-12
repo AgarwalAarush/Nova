@@ -38,7 +38,7 @@ struct GrowingTextView: NSViewRepresentable {
         textView.minSize = NSSize(width: 0, height: minHeight)
         textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         textView.autoresizingMask = [.width]
-        textView.font = .systemFont(ofSize: 15)
+        textView.font = .systemFont(ofSize: 14)
         textView.drawsBackground = false
         textView.textColor = NSColor(AppColors.primaryText)
         textView.backgroundColor = .clear
@@ -61,7 +61,7 @@ struct GrowingTextView: NSViewRepresentable {
 
         // Set typing attributes to ensure typed text has correct appearance
         let typingAttributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.systemFont(ofSize: 15),
+            .font: NSFont.systemFont(ofSize: 14),
             .foregroundColor: NSColor(AppColors.primaryText)
         ]
         textView.typingAttributes = typingAttributes
@@ -98,7 +98,7 @@ struct GrowingTextView: NSViewRepresentable {
             
             // Create attributed string with proper attributes
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: NSFont.systemFont(ofSize: 15),
+                .font: NSFont.systemFont(ofSize: 14),
                 .foregroundColor: NSColor(AppColors.primaryText)
             ]
             
@@ -132,7 +132,7 @@ struct GrowingTextView: NSViewRepresentable {
         let usedRect = layoutManager.usedRect(for: textContainer)
 
         // unwrap font
-        let font = textView.font ?? .systemFont(ofSize: 15)
+        let font = textView.font ?? .systemFont(ofSize: 14)
         // call the instance method on layoutManager, not as a static
         let lineHeight = layoutManager.defaultLineHeight(for: font)
         let newHeight = min(max(usedRect.height, lineHeight), maxHeight)
@@ -175,8 +175,10 @@ struct GrowingTextView: NSViewRepresentable {
 
         @objc func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-            text.wrappedValue = textView.string
-            owner.calculateHeight(for: textView)
+            DispatchQueue.main.async {
+                self.text.wrappedValue = textView.string
+                self.owner.calculateHeight(for: textView)
+            }
         }
 
         func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {

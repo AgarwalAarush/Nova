@@ -10,6 +10,7 @@ Icon?
 *.lock
 *.tmp
 *.bak
+*.sh
 
 # Xcode
 build/

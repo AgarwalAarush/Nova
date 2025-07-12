@@ -11,6 +11,9 @@ struct InputBarView: View {
     @Binding var currentInput: String
     @State private var textHeight: CGFloat = 22
     let onSend: () -> Void
+    let onDictationToggle: () -> Void
+    let isDictating: Bool
+    let isTranscribing: Bool
     
     var body: some View {
         HStack(spacing: 12) {
@@ -18,7 +21,7 @@ struct InputBarView: View {
                 if currentInput.isEmpty {
                     Text("Ask Nova anything...")
                         .foregroundColor(AppColors.secondaryText)
-                        .font(.system(size: 15))
+                        .font(AppFonts.inputField)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)
                         .allowsHitTesting(false)
@@ -43,6 +46,12 @@ struct InputBarView: View {
                     )
             )
             
+            DictationButton(
+                onDictationToggle: onDictationToggle,
+                isDictating: isDictating,
+                isTranscribing: isTranscribing
+            )
+            
             Button(action: onSend) {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 28))
@@ -54,6 +63,63 @@ struct InputBarView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
         .background(AppColors.background)
+    }
+}
+
+struct DictationButton: View {
+    let onDictationToggle: () -> Void
+    let isDictating: Bool
+    let isTranscribing: Bool
+    
+    @State private var pulseAnimation = false
+    
+    var body: some View {
+        Button(action: onDictationToggle) {
+            ZStack {
+                if isDictating {
+                    Circle()
+                        .fill(Color.red.opacity(0.2))
+                        .frame(width: 40, height: 40)
+                        .scaleEffect(pulseAnimation ? 1.2 : 1.0)
+                        .opacity(pulseAnimation ? 0.3 : 0.6)
+                        .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                        .onAppear {
+                            pulseAnimation = true
+                        }
+                        .onDisappear {
+                            pulseAnimation = false
+                        }
+                }
+                
+                Image(systemName: microphoneIcon)
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(microphoneColor)
+            }
+        }
+        .disabled(isTranscribing)
+        .buttonStyle(.plain)
+        .animation(.easeInOut(duration: 0.2), value: isDictating)
+        .animation(.easeInOut(duration: 0.2), value: isTranscribing)
+    }
+    
+    private var microphoneIcon: String {
+        if isTranscribing {
+            return "waveform.circle"
+        } else if isDictating {
+            return "mic.fill"
+        } else {
+            return "mic"
+        }
+    }
+    
+    private var microphoneColor: Color {
+        if isTranscribing {
+            return AppColors.accentBlue
+        } else if isDictating {
+            return .red
+        } else {
+            return AppColors.secondaryText
+        }
     }
 }
 
