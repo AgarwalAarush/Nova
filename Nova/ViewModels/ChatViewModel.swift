@@ -108,17 +108,31 @@ class ChatViewModel: ObservableObject {
     
     @MainActor
     private func startDictation() {
-        guard !isDictating && !isTranscribing else { return }
-        guard let audioRecorder = audioRecorder else { return }
+        print("🎤 Starting dictation...")
+        guard !isDictating && !isTranscribing else { 
+            print("🎤 Cannot start dictation - already dictating: \(isDictating) or transcribing: \(isTranscribing)")
+            return 
+        }
+        guard let audioRecorder = audioRecorder else { 
+            print("🎤 No audio recorder available")
+            return 
+        }
         
         Task {
             do {
                 currentRecordingURL = try await audioRecorder.startRecording()
+                print("🎤 Recording started, URL: \(currentRecordingURL?.absoluteString ?? "nil")")
                 await MainActor.run {
                     isDictating = true
                     errorMessage = nil
                 }
+            } catch AudioRecorderError.permissionDenied {
+                print("🎤 Microphone permission denied")
+                await MainActor.run {
+                    errorMessage = "Microphone access denied. Please enable microphone access for Nova in:\nSystem Settings > Privacy & Security > Microphone\n\nThen restart the app."
+                }
             } catch {
+                print("🎤 Failed to start recording: \(error)")
                 await MainActor.run {
                     errorMessage = "Failed to start recording: \(error.localizedDescription)"
                 }
@@ -128,14 +142,23 @@ class ChatViewModel: ObservableObject {
     
     @MainActor
     private func stopDictation() {
-        guard isDictating else { return }
-        guard let audioRecorder = audioRecorder else { return }
+        print("🎤 Stopping dictation...")
+        guard isDictating else { 
+            print("🎤 Not currently dictating")
+            return 
+        }
+        guard let audioRecorder = audioRecorder else { 
+            print("🎤 No audio recorder available")
+            return 
+        }
         
         guard let recordingURL = audioRecorder.stopRecording() else {
+            print("🎤 Failed to get recording URL from audio recorder")
             isDictating = false
             return
         }
         
+        print("🎤 Recording stopped, URL: \(recordingURL.absoluteString)")
         isDictating = false
         isTranscribing = true
         currentRecordingURL = recordingURL
@@ -147,21 +170,55 @@ class ChatViewModel: ObservableObject {
     
     @MainActor
     private func transcribeAudio(from url: URL) async {
+        print("🎤 Starting transcription for file: \(url)")
+        
         do {
-            let response = try await whisperService.transcribeFile(at: url)
-            let transcription = response.fullText
-            
-            // Append transcription to current input with a space if needed
-            if !currentInput.isEmpty && !currentInput.hasSuffix(" ") {
-                currentInput += " "
+            // Check if file exists and has content
+            guard FileManager.default.fileExists(atPath: url.path) else {
+                throw NSError(domain: "AudioTranscription", code: 1, userInfo: [NSLocalizedDescriptionKey: "Recording file not found"])
             }
-            currentInput += transcription
+            
+            let fileSize = try FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int64 ?? 0
+            print("🎤 Audio file size: \(fileSize) bytes")
+            
+            if fileSize == 0 {
+                throw NSError(domain: "AudioTranscription", code: 2, userInfo: [NSLocalizedDescriptionKey: "Recording file is empty"])
+            }
+            
+            print("🎤 Calling whisperService.transcribeFile...")
+            let response = try await whisperService.transcribeFile(at: url)
+            print("🎤 Transcription response received: \(response)")
+            
+            let transcription = response.fullText.trimmingCharacters(in: .whitespacesAndNewlines)
+            print("🎤 Transcribed text: '\(transcription)'")
+            
+            // Check for common silent audio indicators
+            let silentIndicators = ["[ Silence ]", "[BLANK_AUDIO]", "[silence]", "[blank_audio]", "[ silence ]"]
+            let isSilentAudio = silentIndicators.contains { transcription.lowercased().contains($0.lowercased()) }
+            
+            if !transcription.isEmpty && !isSilentAudio {
+                // Append transcription to current input with a space if needed
+                if !currentInput.isEmpty && !currentInput.hasSuffix(" ") {
+                    currentInput += " "
+                }
+                currentInput += transcription
+                print("🎤 Updated currentInput: '\(currentInput)'")
+            } else {
+                if isSilentAudio {
+                    print("🎤 ⚠️ Warning: Whisper detected silent/blank audio - microphone may not be working")
+                    errorMessage = "No speech detected - check microphone permissions and try speaking louder"
+                } else {
+                    print("🎤 Warning: Transcription result is empty")
+                    errorMessage = "No speech detected in recording"
+                }
+            }
             
             // Clean up the audio file
             try? FileManager.default.removeItem(at: url)
             currentRecordingURL = nil
             
         } catch {
+            print("🎤 Transcription error: \(error)")
             errorMessage = "Transcription failed: \(error.localizedDescription)"
             // Clean up the audio file even on error
             try? FileManager.default.removeItem(at: url)
@@ -169,6 +226,7 @@ class ChatViewModel: ObservableObject {
         }
         
         isTranscribing = false
+        print("🎤 Transcription process completed")
     }
     
     @MainActor

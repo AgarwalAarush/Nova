@@ -17,9 +17,10 @@ struct WhisperConfiguration {
     let maxAudioDurationSeconds: Double
     
     private init() {
-        self.defaultModelName = "base"
+        self.defaultModelName = "ggml-small"
         
-        // Store models in Documents/WhisperModels directory
+        // For Core ML models in app bundle, we don't need a separate directory
+        // But we'll keep this for compatibility
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         self.modelsDirectory = documentsPath.appendingPathComponent("WhisperModels", isDirectory: true)
         
@@ -33,11 +34,50 @@ struct WhisperConfiguration {
     }
     
     var defaultModelURL: URL {
-        modelsDirectory.appendingPathComponent("\(defaultModelName).bin")
+        // First try to get .bin model from Resources/Models in app bundle
+        if let bundleURL = Bundle.main.url(forResource: "Resources/Models/\(defaultModelName)", withExtension: "bin") {
+            return bundleURL
+        }
+        // Try direct path in bundle
+        if let bundleURL = Bundle.main.url(forResource: defaultModelName, withExtension: "bin") {
+            return bundleURL
+        }
+        // Then try Core ML models in Resources/Models
+        if let bundleURL = Bundle.main.url(forResource: "Resources/Models/\(defaultModelName)", withExtension: "mlmodelc") {
+            return bundleURL
+        }
+        // Try direct Core ML path
+        if let bundleURL = Bundle.main.url(forResource: defaultModelName, withExtension: "mlmodelc") {
+            return bundleURL
+        }
+        // Fallback to Documents directory
+        return modelsDirectory.appendingPathComponent("\(defaultModelName).bin")
     }
     
     func modelURL(for modelName: String) -> URL {
-        modelsDirectory.appendingPathComponent("\(modelName).bin")
+        // First try to get .bin model from Resources/Models in app bundle
+        if let bundleURL = Bundle.main.url(forResource: "Resources/Models/\(modelName)", withExtension: "bin") {
+            return bundleURL
+        }
+        // Try direct path in bundle
+        if let bundleURL = Bundle.main.url(forResource: modelName, withExtension: "bin") {
+            return bundleURL
+        }
+        // Then try Core ML models in Resources/Models
+        if let bundleURL = Bundle.main.url(forResource: "Resources/Models/\(modelName)", withExtension: "mlmodelc") {
+            return bundleURL
+        }
+        // Try direct Core ML path
+        if let bundleURL = Bundle.main.url(forResource: modelName, withExtension: "mlmodelc") {
+            return bundleURL
+        }
+        // Fallback to Documents directory
+        return modelsDirectory.appendingPathComponent("\(modelName).bin")
+    }
+    
+    /// Get Core ML model name for the bundled model
+    var coreMLModelName: String {
+        return defaultModelName
     }
     
     // Available model configurations

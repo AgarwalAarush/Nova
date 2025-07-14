@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B06C9752E2178F8003B7661 /* SwiftWhisper in Frameworks */ = {isa = PBXBuildFile; productRef = 9B06C9742E2178F8003B7661 /* SwiftWhisper */; };
-		9B06C97C2E218CDC003B7661 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 9B06C97B2E218CDC003B7661 /* Markdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B06C9752E2178F8003B7661 /* SwiftWhisper in Frameworks */,
-				9B06C97C2E218CDC003B7661 /* Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +118,6 @@
 			name = Nova;
 			packageProductDependencies = (
 				9B06C9742E2178F8003B7661 /* SwiftWhisper */,
-				9B06C97B2E218CDC003B7661 /* Markdown */,
 			);
 			productName = Nova;
 			productReference = 9B06C9172E206B2E003B7661 /* Nova.app */;
@@ -206,7 +203,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9B06C9732E2178F8003B7661 /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
-				9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9B06C9182E206B2E003B7661 /* Products */;
@@ -416,6 +412,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Nova needs microphone access to enable voice dictation for your conversations with the AI assistant.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -443,6 +440,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Nova needs microphone access to enable voice dictation for your conversations with the AI assistant.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -574,14 +572,6 @@
 				kind = branch;
 			};
 		};
-		9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/swiftlang/swift-markdown.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -589,11 +579,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B06C9732E2178F8003B7661 /* XCRemoteSwiftPackageReference "SwiftWhisper" */;
 			productName = SwiftWhisper;
-		};
-		9B06C97B2E218CDC003B7661 /* Markdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B06C97A2E218CDC003B7661 /* XCRemoteSwiftPackageReference "swift-markdown" */;
-			productName = Markdown;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

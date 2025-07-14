@@ -19,7 +19,7 @@ struct InputBarView: View {
         HStack(spacing: 12) {
             ZStack(alignment: .topLeading) {
                 if currentInput.isEmpty {
-                    Text("Ask Nova anything...")
+                    SwiftUI.Text("Ask Nova anything...")
                         .foregroundColor(AppColors.secondaryText)
                         .font(AppFonts.inputField)
                         .padding(.horizontal, 16)
@@ -53,7 +53,7 @@ struct InputBarView: View {
             )
             
             Button(action: onSend) {
-                Image(systemName: "arrow.up.circle.fill")
+                SwiftUI.Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 28))
                     .foregroundColor(currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? AppColors.secondaryText : AppColors.accentBlue)
             }
@@ -91,7 +91,7 @@ struct DictationButton: View {
                         }
                 }
                 
-                Image(systemName: microphoneIcon)
+                SwiftUI.Image(systemName: microphoneIcon)
                     .font(.system(size: 20, weight: .medium))
                     .foregroundColor(microphoneColor)
             }

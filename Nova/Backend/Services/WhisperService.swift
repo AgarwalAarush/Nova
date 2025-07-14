@@ -69,6 +69,8 @@ class WhisperService: AudioTranscriptionService {
         } catch let error as WhisperError {
             // Convert WhisperError to AIServiceError
             throw mapWhisperError(error)
+        } catch let error as AIServiceError {
+            throw error
         } catch {
             throw AIServiceError.audioProcessingFailed(error)
         }
@@ -85,11 +87,21 @@ class WhisperService: AudioTranscriptionService {
     }
     
     func isModelAvailable(_ modelSize: WhisperConfiguration.ModelSize) -> Bool {
-        return client.isModelAvailable(modelSize)
+        #if canImport(SwiftWhisper)
+        return self.client.isModelAvailable(modelSize)
+        #else
+        // Mock implementation - always return true for testing
+        return true
+        #endif
     }
     
     func getModelStatus(_ modelSize: WhisperConfiguration.ModelSize) -> WhisperModelStatus {
-        return client.getModelStatus(modelSize)
+        #if canImport(SwiftWhisper)
+        return self.client.getModelStatus(modelSize)
+        #else
+        // Mock implementation
+        return .downloaded
+        #endif
     }
     
     // MARK: - High-level Convenience Methods
@@ -162,11 +174,17 @@ class WhisperService: AudioTranscriptionService {
     
     /// Ensure the current model is downloaded and loaded
     func ensureModelReady() async throws {
+        #if canImport(SwiftWhisper)
         if !isModelAvailable(currentModel) {
             try await downloadModel(currentModel)
         }
         
         try await ensureModelLoaded()
+        #else
+        // Mock implementation when SwiftWhisper is not available
+        print("🎤 Using mock model - SwiftWhisper not configured")
+        isModelLoaded = true
+        #endif
     }
     
     /// Get available disk space for model downloads
@@ -225,20 +243,43 @@ class WhisperService: AudioTranscriptionService {
     // MARK: - Private Helpers
     
     private func ensureModelLoaded() async throws {
+        print("🎤 ensureModelLoaded() called - isModelLoaded: \(isModelLoaded)")
+        
+        #if canImport(SwiftWhisper)
         if !isModelLoaded {
+            print("🎤 Model not loaded, calling loadCurrentModel()")
             try await loadCurrentModel()
+        } else {
+            print("🎤 Model already loaded")
         }
+        #else
+        // Mock implementation when SwiftWhisper is not available
+        print("🎤 Using mock implementation - SwiftWhisper not available")
+        isModelLoaded = true
+        #endif
     }
     
     private func loadCurrentModel() async throws {
+        print("🎤 loadCurrentModel() called with currentModel: \(currentModel)")
+        
+        #if canImport(SwiftWhisper)
         do {
+            print("🎤 Calling client.loadModel(\(currentModel))")
             try await client.loadModel(currentModel)
             isModelLoaded = true
+            print("🎤 Model loaded successfully, isModelLoaded: \(isModelLoaded)")
         } catch let error as WhisperError {
+            print("🎤 WhisperError occurred: \(error)")
             throw mapWhisperError(error)
         } catch {
+            print("🎤 Other error occurred: \(error)")
             throw AIServiceError.modelNotFound
         }
+        #else
+        // Mock implementation when SwiftWhisper is not available
+        print("🎤 Loading mock model (SwiftWhisper not available)")
+        isModelLoaded = true
+        #endif
     }
     
     private func mapWhisperError(_ error: WhisperError) -> AIServiceError {

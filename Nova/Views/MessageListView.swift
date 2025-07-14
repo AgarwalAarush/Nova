@@ -22,10 +22,10 @@ struct MessageListView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             }
-            .onChange(of: messages.count) { _ in
+            .onChange(of: messages.count) { _, _ in
                 scrollToBottom(proxy)
             }
-            .onChange(of: streamingMessageContent) { _ in
+            .onChange(of: streamingMessageContent) { _, _ in
                 scrollToBottom(proxy)
             }
         }
@@ -64,9 +64,8 @@ struct UserMessageView: View {
     let message: ChatMessage
     
     var body: some View {
-        Text(message.content)
-            .font(AppFonts.messageBody)
-            .foregroundColor(.white)
+        SwiftUI.Text(message.content)
+            .foregroundColor(Color.white)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(
@@ -74,6 +73,7 @@ struct UserMessageView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 18))
             )
             .frame(maxWidth: 300, alignment: .trailing)
+            .font(AppFonts.messageBody)
     }
 }
 
@@ -86,8 +86,8 @@ struct AIMessageView: View {
                 // Typing indicator for empty/streaming messages
                 TypingIndicator()
             } else {
-                MarkdownText(content: message.content)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                NovaMarkdownView.chat(message.content)
+                    .frame(maxWidth: .infinity, alignment: Alignment.leading)
             }
         }
     }
