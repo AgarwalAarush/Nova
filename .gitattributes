@@ -15,3 +15,5 @@ Nova/Resources/Models/** filter=lfs diff=lfs merge=lfs -text
 *.entitlements filter=lfs diff=lfs merge=lfs -text
 *.xccurrentversion filter=lfs diff=lfs merge=lfs -text
 /Nova/Nova.xcdatamodeld/Nova.xcdatamodel/contents filter=lfs diff=lfs merge=lfs -text
+*.mlmodelc filter=lfs diff=lfs merge=lfs -text
+*.onnx filter=lfs diff=lfs merge=lfs -text
