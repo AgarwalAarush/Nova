@@ -1,8 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>_XCCurrentVersionName</key>
-	<string>Nova.xcdatamodel</string>
-</dict>
-</plist>
+version https://git-lfs.github.com/spec/v1
+oid sha256:0f00c549fdaa1a22f0ece7ba6f5a4f13b9c8bc719f8cc065fa5b71f84ab36ada
+size 257

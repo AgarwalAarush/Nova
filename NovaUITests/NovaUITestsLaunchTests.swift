@@ -1,33 +1,3 @@
-//
-//  NovaUITestsLaunchTests.swift
-//  NovaUITests
-//
-//  Created by Aarush Agarwal on 7/10/25.
-//
-
-import XCTest
-
-final class NovaUITestsLaunchTests: XCTestCase {
-
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
-        true
-    }
-
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-    }
-
-    @MainActor
-    func testLaunch() throws {
-        let app = XCUIApplication()
-        app.launch()
-
-        // Insert steps here to perform after app launch but before taking a screenshot,
-        // such as logging into a test account or navigating somewhere in the app
-
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch Screen"
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2c391df2e619cfdb99392617ca0bc0f8f641978fca4c502c8c305172b10de977
+size 810

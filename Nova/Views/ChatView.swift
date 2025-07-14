@@ -1,25 +1,3 @@
-//
-//  ChatView.swift
-//  Nova
-//
-//  Created by Aarush Agarwal on 7/11/25.
-//
-
-import SwiftUI
-
-struct ChatView: View {
-    @ObservedObject var viewModel: ChatViewModel
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            MessageListView(messages: viewModel.messages)
-            InputBarView(
-                currentInput: $viewModel.currentInput,
-                onSend: viewModel.sendMessage,
-                onDictationToggle: viewModel.toggleDictation,
-                isDictating: viewModel.isDictating,
-                isTranscribing: viewModel.isTranscribing
-            )
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:475b9a71fcbb387028508843748d15b3cb3501ca886d1fca653142ce6707faa9
+size 617
