@@ -1,0 +1,206 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild build -scheme Nova -destination platform=macOS
+
+Resolve Package Graph
+
+
+Resolved source packages:
+  cmark-gfm: https://github.com/swiftlang/swift-cmark.git @ gfm (b97d094)
+  swift-markdown: https://github.com/swiftlang/swift-markdown.git @ main (c281baa)
+  SwiftWhisper: https://github.com/exPHAT/SwiftWhisper.git @ master (c340197)
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (11 targets)
+    Target 'Nova' in project 'Nova'
+        ➜ Explicit dependency on target 'SwiftWhisper' in project 'SwiftWhisper'
+        ➜ Explicit dependency on target 'Markdown' in project 'swift-markdown'
+    Target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'CAtomic' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+    Target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'CAtomic' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+    Target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm' in project 'cmark-gfm' (no dependencies)
+    Target 'CAtomic' in project 'swift-markdown' (no dependencies)
+    Target 'SwiftWhisper' in project 'SwiftWhisper'
+        ➜ Explicit dependency on target 'SwiftWhisper' in project 'SwiftWhisper'
+        ➜ Explicit dependency on target 'whisper_cpp' in project 'SwiftWhisper'
+    Target 'SwiftWhisper' in project 'SwiftWhisper'
+        ➜ Explicit dependency on target 'whisper_cpp' in project 'SwiftWhisper'
+    Target 'whisper_cpp' in project 'SwiftWhisper' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/momc --dry-run --action generate --swift-version 5.0 --sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk --macosx-deployment-target 15.5 --module Nova /Users/aarushagarwal/Documents/Programming/Nova/Nova/Nova.xcdatamodeld /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/DerivedSources/CoreDataGenerated/Nova
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -x objective-c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -x c++ -c /dev/null
+
+ReadFileContents /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/docc/features.json
+
+Build description signature: c2ca893911c35b51838986cf0354d130
+Build description path: /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/XCBuildData/c2ca893911c35b51838986cf0354d130.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache
+
+WriteAuxiliaryFile /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.SwiftFileList (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    write-file /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.SwiftFileList
+
+WriteAuxiliaryFile /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.SwiftConstValuesFileList (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    write-file /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.LinkFileList (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    write-file /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.LinkFileList
+
+ScanDependencies /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/extensions/autolink.c normal arm64 c com.apple.compilers.llvm.clang.1_0.compiler (in target 'cmark-gfm-extensions' from project 'cmark-gfm')
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    
+    Using response file: /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+    
+    builtin-ScanDependencies -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.o.scan -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -ivfsstatcache /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -fmodules-prune-interval\=86400 -fmodules-prune-after\=345600 -fbuild-session-file\=/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -fmodules-validate-once-per-build-session -Wnon-modular-include-in-framework-module -Werror\=non-modular-include-in-framework-module -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -w -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-implicit-fallthrough -fstrict-aliasing -Wdeprecated-declarations -Wno-sign-conversion -Wno-infinite-recursion -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-semicolon-before-method-body -index-store-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Index.noindex/DataStore @/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp -MMD -MT dependencies -MF /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.d --serialize-diagnostics /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.dia -c /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/extensions/autolink.c -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.o -index-unit-output-path /cmark-gfm.build/Debug/cmark-gfm-extensions.build/Objects-normal/arm64/autolink.o
+
+ScanDependencies /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/SwiftWhisper/Sources/whisper_cpp/coreml/whisper-encoder-impl.m normal arm64 objective-c com.apple.compilers.llvm.clang.1_0.compiler (in target 'whisper_cpp' from project 'SwiftWhisper')
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    
+    Using response file: /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/e6072d4f65d7061329687fe24e3d63a7-common-args.resp
+    
+    builtin-ScanDependencies -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.o.scan -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -ivfsstatcache /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -fmodules-prune-interval\=86400 -fmodules-prune-after\=345600 -fbuild-session-file\=/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -fmodules-validate-once-per-build-session -Wnon-modular-include-in-framework-module -Werror\=non-modular-include-in-framework-module -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-implicit-atomic-properties -Wno-objc-interface-ivars -Wno-arc-repeated-use-of-weak -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -w -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-implicit-fallthrough -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion -Wno-infinite-recursion -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-semicolon-before-method-body -index-store-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Index.noindex/DataStore @/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/e6072d4f65d7061329687fe24e3d63a7-common-args.resp -MMD -MT dependencies -MF /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.d --serialize-diagnostics /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.dia -c /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/SwiftWhisper/Sources/whisper_cpp/coreml/whisper-encoder-impl.m -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.o -index-unit-output-path /SwiftWhisper.build/Debug/whisper_cpp.build/Objects-normal/arm64/whisper-encoder-impl.o
+
+ScanDependencies /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-markdown/Sources/CAtomic/CAtomic.c normal arm64 c com.apple.compilers.llvm.clang.1_0.compiler (in target 'CAtomic' from project 'swift-markdown')
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    
+    Using response file: /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+    
+    builtin-ScanDependencies -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.o.scan -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -ivfsstatcache /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -fmodules-prune-interval\=86400 -fmodules-prune-after\=345600 -fbuild-session-file\=/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -fmodules-validate-once-per-build-session -Wnon-modular-include-in-framework-module -Werror\=non-modular-include-in-framework-module -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -w -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-implicit-fallthrough -fstrict-aliasing -Wdeprecated-declarations -Wno-sign-conversion -Wno-infinite-recursion -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-semicolon-before-method-body -index-store-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Index.noindex/DataStore @/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp -MMD -MT dependencies -MF /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.d --serialize-diagnostics /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.dia -c /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-markdown/Sources/CAtomic/CAtomic.c -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.o -index-unit-output-path /swift-markdown.build/Debug/CAtomic.build/Objects-normal/arm64/CAtomic.o
+
+ScanDependencies /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/src/arena.c normal arm64 c com.apple.compilers.llvm.clang.1_0.compiler (in target 'cmark-gfm' from project 'cmark-gfm')
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    
+    Using response file: /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+    
+    builtin-ScanDependencies -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.o.scan -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -ivfsstatcache /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -fmodules-prune-interval\=86400 -fmodules-prune-after\=345600 -fbuild-session-file\=/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -fmodules-validate-once-per-build-session -Wnon-modular-include-in-framework-module -Werror\=non-modular-include-in-framework-module -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -w -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-implicit-fallthrough -fstrict-aliasing -Wdeprecated-declarations -Wno-sign-conversion -Wno-infinite-recursion -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-semicolon-before-method-body -index-store-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Index.noindex/DataStore @/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp -MMD -MT dependencies -MF /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.d --serialize-diagnostics /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.dia -c /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/src/arena.c -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.o -index-unit-output-path /cmark-gfm.build/Debug/cmark-gfm.build/Objects-normal/arm64/arena.o
+
+ProcessProductPackaging /Users/aarushagarwal/Documents/Programming/Nova/Nova/Nova.entitlements /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    
+    Entitlements:
+    
+    {
+    "com.apple.security.app-sandbox" = 1;
+    "com.apple.security.device.microphone" = 1;
+    "com.apple.security.files.user-selected.read-only" = 1;
+    "com.apple.security.get-task-allow" = 1;
+    "com.apple.security.network.client" = 1;
+    "com.apple.security.network.server" = 1;
+}
+    
+    builtin-productPackagingUtility /Users/aarushagarwal/Documents/Programming/Nova/Nova/Nova.entitlements -entitlements -format xml -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent
+
+ProcessProductPackagingDER /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent.der (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    /usr/bin/derq query -f xml -i /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent -o /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova.app.xcent.der --raw
+
+SwiftDriver Nova normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Nova -Onone -enforce-exclusivity\=checked @/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.SwiftFileList -DDEBUG -Xcc -fmodule-map-file\=/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/GeneratedModuleMaps/whisper_cpp.modulemap -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -target arm64-apple-macos15.5 -g -module-cache-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Index.noindex/DataStore -swift-version 5 -I /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/PackageFrameworks -F /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug -emit-localized-strings -emit-localized-strings-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx15.5-24F74-8254517eb8b97d462ccbc072ba9094c9.sdkstatcache -output-file-map /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova_const_extract_protocols.json -Xcc -iquote -Xcc /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova-generated-files.hmap -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova-own-target-headers.hmap -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova-32ca2a2dd4ceaa1690d8e977dc194bb9-VFS/all-product-headers.yaml -Xcc -iquote -Xcc /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Nova-project-headers.hmap -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/SwiftWhisper/Sources/whisper_cpp/include -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/src/include -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-cmark/extensions/include -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/SourcePackages/checkouts/swift-markdown/Sources/CAtomic/include -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Products/Debug/include -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/DerivedSources-normal/arm64 -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/DerivedSources/arm64 -Xcc -I/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/Nova.build/Debug/Nova.build/Objects-normal/arm64/Nova-Swift.h -working-directory /Users/aarushagarwal/Documents/Programming/Nova -experimental-emit-module-separately -disable-cmo
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stdarg-2B5HNF378IYGH0L3V57BR329G.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stdarg-2B5HNF378IYGH0L3V57BR329G.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/os_availability_internal-84S6UODCPZ48XDX14OJ71F57U.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/os_availability_internal-84S6UODCPZ48XDX14OJ71F57U.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stddef-9B5G45NAW9YWVYJ3TD0KMO233.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stddef-9B5G45NAW9YWVYJ3TD0KMO233.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/ptrcheck-33DRTUN850BV9T0HBYNMTV6CG.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/ptrcheck-33DRTUN850BV9T0HBYNMTV6CG.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/os_availability-1S12WOEC7D3TYNNHT3Y1UG3E5.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/os_availability-1S12WOEC7D3TYNNHT3Y1UG3E5.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/DarwinFoundation-4NRQ446O5BJRCT1FG1UP0E81S.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/DarwinFoundation-4NRQ446O5BJRCT1FG1UP0E81S.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_stdint-6KZBOXAVBGM0P13IVIT6KRXGI.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_stdint-6KZBOXAVBGM0P13IVIT6KRXGI.scan
+
+PrecompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stdint-3XYP4VT58WKIMTQA2R9P7FE7U.scan
+    cd /Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj
+    builtin-precompileModule /Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif/Build/Intermediates.noindex/ExplicitPrecompiledModules/_Builtin_stdint-3XYP4VT58WKIMTQA2R9P7FE7U.scan
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ Nova (in target 'Nova' from project 'Nova')
+
+EmitSwiftModule normal arm64 (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    
+/Users/aarushagarwal/Documents/Programming/Nova/Nova/Backend/Services/AudioRecorderService.swift:86:10: warning: main actor-isolated instance method 'audioRecorderDidFinishRecording(_:successfully:)' cannot be used to satisfy nonisolated requirement from protocol 'AVAudioRecorderDelegate'; this is an error in the Swift 6 language mode
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+         ^
+/Users/aarushagarwal/Documents/Programming/Nova/Nova/Backend/Services/AudioRecorderService.swift:86:10: note: add 'nonisolated' to 'audioRecorderDidFinishRecording(_:successfully:)' to make this instance method not isolated to the actor
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+         ^
+    nonisolated 
+/Users/aarushagarwal/Documents/Programming/Nova/Nova/Backend/Services/AudioRecorderService.swift:85:33: note: add '@preconcurrency' to the 'AVAudioRecorderDelegate' conformance to defer isolation checking to run time
+extension AudioRecorderService: AVAudioRecorderDelegate {
+                                ^
+                                @preconcurrency 
+/Users/aarushagarwal/Documents/Programming/Nova/Nova/Backend/Services/AudioRecorderService.swift:90:10: warning: main actor-isolated instance method 'audioRecorderEncodeErrorDidOccur(_:error:)' cannot be used to satisfy nonisolated requirement from protocol 'AVAudioRecorderDelegate'; this is an error in the Swift 6 language mode
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+         ^
+/Users/aarushagarwal/Documents/Programming/Nova/Nova/Backend/Services/AudioRecorderService.swift:90:10: note: add 'nonisolated' to 'audioRecorderEncodeErrorDidOccur(_:error:)' to make this instance method not isolated to the actor
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+         ^
+    nonisolated 
+
+SwiftCompile normal arm64 Compiling\ MarkdownText.swift /Users/aarushagarwal/Documents/Programming/Nova/Nova/Views/MarkdownText.swift (in target 'Nova' from project 'Nova')
+SwiftCompile normal arm64 /Users/aarushagarwal/Documents/Programming/Nova/Nova/Views/MarkdownText.swift (in target 'Nova' from project 'Nova')
+    cd /Users/aarushagarwal/Documents/Programming/Nova
+    
