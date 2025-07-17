@@ -1,0 +1,114 @@
+---
+description: documentation, context, and guidelines for high quality code generation
+globs: *.swift
+alwaysApply: false
+---
+
+Project Overview
+	•	Project Name: Nova
+	•	Description: Nova is a native SwiftUI application for macOS/iOS, providing users with a unified chat client interface for multiple AI models (e.g., OpenAI, Anthropic, Mistral, Ollama). It includes voice-to-text functionality using Whisper.
+
+⸻
+
+Technology Stack
+	•	Primary Language: Swift
+	•	Frameworks: SwiftUI, CoreData
+	•	Database: SQLite (via CoreData)
+	•	AI Integration: REST APIs (OpenAI, Anthropic, Mistral, Ollama), ONNX models for local Whisper inference
+	•	Package Manager: Swift Package Manager
+
+⸻
+
+Architectural Guidelines
+	•	Architecture: MVVM (Model-View-ViewModel)
+	•	Directory Structure:
+	•	Nova/: Source code
+	•	Backend/: AI service integrations
+	•	Clients: API clients
+	•	Services: Business logic and orchestration
+	•	Models: Request/response structures
+	•	Views/: SwiftUI views
+	•	ViewModels/: Logic for views
+	•	Models/: Core app models (e.g., chat messages)
+	•	NovaMarkdown/: Markdown rendering
+	•	Resources/: Assets and ML models
+	•	NovaTests/, NovaUITests/: Test suites
+
+⸻
+
+Coding Conventions
+	•	Formatting: Follow Xcode’s default Swift formatting.
+	•	Naming:
+	•	Types/Files: PascalCase (ChatViewModel)
+	•	Variables/Functions: camelCase (chatMessages, sendMessage())
+	•	API & Services:
+	•	RESTful, reusable services
+	•	Clear separation between clients and services
+	•	Error Handling:
+	•	Use Swift’s Result type, and do-try-catch blocks consistently.
+
+⸻
+
+Key Entrypoints
+	•	Main Application: Nova/NovaApp.swift
+	•	Configuration:
+	•	Global: Configuration/AppConfig.swift
+	•	Provider-specific: Backend/Configuration/
+
+⸻
+
+Development & Testing Instructions
+
+Building
+
+# Open in Xcode
+open Nova.xcodeproj
+
+# Command-line build
+xcodebuild -project Nova.xcodeproj -scheme Nova -destination 'platform=macOS' build
+
+Testing
+
+# Run all tests
+xcodebuild test -project Nova.xcodeproj -scheme Nova -destination 'platform=macOS'
+
+# Specific test targets
+xcodebuild test -project Nova.xcodeproj -scheme Nova -destination 'platform=macOS' -only-testing:NovaTests
+xcodebuild test -project Nova.xcodeproj -scheme Nova -destination 'platform=macOS' -only-testing:NovaUITests
+
+
+⸻
+
+AI Collaboration Guidelines
+	•	New Features:
+	•	Adhere to existing MVVM and service-oriented architecture.
+	•	Implement UI components exclusively with SwiftUI.
+	•	New AI integrations must create separate Client and Service modules.
+	•	Security:
+	•	Never hardcode secrets or API keys.
+	•	Use environment variables or secure configuration files.
+	•	Dependencies:
+	•	New dependencies must use Swift Package Manager; ensure project file updates.
+	•	Commit Style:
+	•	Follow Conventional Commits (feat:, fix:, docs:, refactor:).
+
+⸻
+
+Confidence & Standards
+
+Section	Confidence	Notes
+Project Goal	High	AI-powered multi-provider chat application
+Technologies	High	SwiftUI, CoreData clearly established
+Architecture	High	Clear MVVM evidence in structure
+Testing	High	XCTest integration visible
+Package Manager	Medium	Swift Package Manager inferred from Xcode conventions
+
+
+⸻
+
+Usage Notes for AI
+	•	Always review this document before generating or refactoring code.
+	•	Follow outlined conventions, security practices, and architectural patterns.
+	•	Prefer replicating existing project patterns and structures.
+
+Important: Always utilize code-reasoning MCP when interacting with code.
