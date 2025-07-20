@@ -36,7 +36,7 @@ struct InputBarView: View {
                         isPlaceholderVisible: $isPlaceholderVisible,
                         onSend: onSend,
                         onEscapeKey: {
-                            chatViewModel.handleEscapeKey()
+                            chatViewModel.handleCommandEscapeKey()
                         },
                         onFocusChange: { focused in
                             chatViewModel.setInputFocus(focused)

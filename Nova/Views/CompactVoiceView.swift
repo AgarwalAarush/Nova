@@ -119,6 +119,19 @@ struct CompactVoiceView: View {
         .frame(height: 38)
         .background(AppColors.background)
         .cornerRadius(8)
+        .background(
+            CompactKeyEventHandler { event in
+                if event.keyCode == 53 && event.type == .keyDown { // Escape key code
+                    if event.modifierFlags.contains(.command) {
+                        // Command+Escape: Toggle view mode
+                        viewModel.handleCommandEscapeKey()
+                        return true
+                    }
+                    // Let plain Escape pass through normally
+                }
+                return false
+            }
+        )
 //        .overlay(
 //            Rectangle()
 //                .frame(height: 1)
@@ -133,6 +146,77 @@ struct CompactVoiceView: View {
     CompactVoiceView(viewModel: ChatViewModel())
         .environmentObject(WhisperService())
         .frame(width: 400)
+}
+
+// MARK: - Key Event Handler
+
+private struct CompactKeyEventHandler: NSViewRepresentable {
+    let onKeyEvent: (NSEvent) -> Bool
+    
+    func makeNSView(context: Context) -> CompactKeyEventView {
+        let view = CompactKeyEventView()
+        view.onKeyEvent = onKeyEvent
+        view.setupGlobalKeyMonitor()
+        return view
+    }
+    
+    func updateNSView(_ nsView: CompactKeyEventView, context: Context) {
+        nsView.onKeyEvent = onKeyEvent
+    }
+}
+
+private class CompactKeyEventView: NSView {
+    var onKeyEvent: ((NSEvent) -> Bool)?
+    private var keyDownMonitor: Any?
+    
+    override var acceptsFirstResponder: Bool { true }
+    override var canBecomeKeyView: Bool { true }
+    
+    func setupGlobalKeyMonitor() {
+        // Remove existing monitor if any
+        if let monitor = keyDownMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        
+        // Set up global key monitor for this window
+        keyDownMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { [weak self] event in
+            guard let self = self,
+                  let handler = self.onKeyEvent,
+                  event.window == self.window else {
+                return event
+            }
+            
+            return handler(event) ? nil : event
+        }
+    }
+    
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if window != nil {
+            setupGlobalKeyMonitor()
+        }
+    }
+    
+    deinit {
+        if let monitor = keyDownMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+    }
+    
+    override func keyDown(with event: NSEvent) {
+        if let handler = onKeyEvent, handler(event) {
+            return // Event was handled
+        }
+        super.keyDown(with: event)
+    }
+    
+    override func flagsChanged(with event: NSEvent) {
+        // Also handle flag changes for modifier keys
+        if let handler = onKeyEvent, handler(event) {
+            return
+        }
+        super.flagsChanged(with: event)
+    }
 }
 
 // MARK: - Window Accessor Helpers

@@ -278,13 +278,18 @@ public struct GrowingTextView: NSViewRepresentable {
         // MARK: - Focus Management
         
         private func handleEscapeKey(in textView: NSTextView) {
-            // Remove focus from input
-            if textView.window?.firstResponder == textView {
-                textView.window?.makeFirstResponder(nil)
-            }
+            // Check if Command key is pressed
+            let isCommandPressed = NSEvent.modifierFlags.contains(.command)
             
-            // Notify parent that escape was pressed (after focus change)
-            onEscapeKey?()
+            if isCommandPressed {
+                // Command+Escape: Let parent handle view mode toggle
+                onEscapeKey?()
+            } else {
+                // Plain Escape: Only remove focus from input
+                if textView.window?.firstResponder == textView {
+                    textView.window?.makeFirstResponder(nil)
+                }
+            }
         }
         
         public func textViewDidBecomeFirstResponder(_ textView: NSTextView) {

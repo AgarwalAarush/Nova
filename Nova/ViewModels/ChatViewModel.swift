@@ -215,12 +215,14 @@ class ChatViewModel: ObservableObject {
     
     @MainActor
     func handleEscapeKey() {
-        // If input is not focused, switch to compact voice view
-        if !isInputFocused && viewMode == .normal {
-            toggleViewMode()
-        }
-        // Note: If input IS focused, GrowingTextView handles removing focus
-        // and will call this method again after focus is removed
+        // Plain escape only removes focus, no view switching
+        // Focus removal is handled by GrowingTextView
+    }
+    
+    @MainActor
+    func handleCommandEscapeKey() {
+        // Command+Escape toggles between ChatView and CompactVoiceView
+        toggleViewMode()
     }
     
     @MainActor

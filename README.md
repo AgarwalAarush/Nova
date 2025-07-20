@@ -173,29 +173,29 @@ Nova understands natural language requests for system tasks:
 ## 🛣 Next Steps & Roadmap
 
 ### 🔊 Text-to-Speech Integration
-- **Cartesia Integration**: High-quality AI-generated speech synthesis
-- **ElevenLabs Support**: Premium voice cloning and natural speech
-- **Local TTS**: On-device speech synthesis for privacy
-- **Voice Customization**: Multiple voice options and speech parameters
+- [ ] **Cartesia Integration**: High-quality AI-generated speech synthesis
+- [ ] **ElevenLabs Support**: Premium voice cloning and natural speech
+- [ ] **Local TTS**: On-device speech synthesis for privacy
+- [ ] **Voice Customization**: Multiple voice options and speech parameters
 
 ### 🖥 Enhanced macOS Integration
-- **Improved mac-use**: Advanced macOS automation with window management
-- **App Control**: Deep integration with native macOS applications
-- **Workflow Automation**: Multi-step task automation with conditional logic
-- **System Monitoring**: Intelligent system state awareness and optimization
+- [ ] **Improved mac-use**: Advanced macOS automation with window management
+- [ ] **App Control**: Deep integration with native macOS applications
+- [ ] **Workflow Automation**: Multi-step task automation with conditional logic
+- [ ] **System Monitoring**: Intelligent system state awareness and optimization
 
-### 📌 Pinnable Voice Interface
-- **Top Window Priority**: Always-on-top compact voice interface
-- **Global Hotkeys**: System-wide voice activation shortcuts
-- **Floating Window**: Draggable, resizable voice interface
-- **Quick Actions**: Rapid access to common automation tasks
+### 📌 Voice Interface
+- [x] **Top Window Priority**: Always-on-top compact voice interface
+- [ ] **Global Hotkeys**: System-wide voice activation shortcuts
+- [ ] **Floating Window**: Draggable, resizable voice interface
+- [ ] **Quick Actions**: Rapid access to common automation tasks
+- [x] **Switching**: Quick switching between the two views
 
 ### 🔮 Advanced Features (Future)
-- **Wake Word Detection**: "Hey Nova" activation (models prepared)
-- **Conversation History**: Persistent chat history with search
-- **Memory System**: Long-term user preference learning
-- **Custom Workflows**: User-defined automation sequences
-- **Plugin Architecture**: Third-party automation tool integration
+- [ ] **Wake Word Detection**: "Hey Nova" activation (models prepared)
+- [ ] **Conversation History**: Persistent chat history with search
+- [ ] **Memory System**: Long-term user preference learning
+- [ ] **Custom Workflows**: User-defined automation sequences
 
 ## 🧪 Development
 
