@@ -1,16 +1,14 @@
-# Nova AI Assistant
 
 <div align="center">
+
+<img src="Nova/Assets.xcassets/AppIcon.appiconset/AppIcon-4%20(dragged).png" alt="Nova App Icon" width="128" height="128">
+# Nova AI Assistant
+
+*Nova - Your intelligent macOS AI assistant with comprehensive system automation*
 
 <!-- Demo Video Section -->
 ## 🎬 Demo Video
 > *Coming Soon - Demo video showcasing Nova's AI-powered automation and voice interaction capabilities*
-
-<!-- App Icon Section -->  
-## 🚀 App Icon
-<img src="Nova/Assets.xcassets/AppIcon.appiconset/AppIcon-4%20(dragged).png" alt="Nova App Icon" width="128" height="128">
-
-*Nova - Your intelligent macOS AI assistant with comprehensive system automation*
 
 </div>
 
@@ -60,7 +58,7 @@ Nova implements a sophisticated multi-layer architecture with clean separation o
 ```
 Nova/
 ├── NovaApp.swift                    # Main application entry point
-├── ContentView.swift                # Primary UI controller  
+├── ContentView.swift                # Primary UI controller
 ├── ChatView.swift                   # Main chat interface
 ├── CompactVoiceView.swift          # Minimal voice interface
 └── Backend/
@@ -116,7 +114,7 @@ Nova/
 - **Network Access**: For cloud AI services
 
 ### Dependencies & Tools
-- Xcode 15.0+ 
+- Xcode 15.0+
 - Swift 6.0
 - API keys for cloud providers (OpenAI, Claude, Mistral)
 - Ollama (optional, for local AI processing)
@@ -137,7 +135,7 @@ open Nova.xcodeproj
 ### 3. Configure AI Providers
 Launch Nova and use the built-in settings interface to securely configure:
 - **OpenAI**: API key for GPT models
-- **Claude**: Anthropic API key for Claude models  
+- **Claude**: Anthropic API key for Claude models
 - **Mistral**: API key for Mistral models
 - **Ollama**: Local installation (optional)
 
@@ -179,7 +177,7 @@ Nova understands natural language requests for system tasks:
 - **Local TTS**: On-device speech synthesis for privacy
 - **Voice Customization**: Multiple voice options and speech parameters
 
-### 🖥 Enhanced macOS Integration  
+### 🖥 Enhanced macOS Integration
 - **Improved mac-use**: Advanced macOS automation with window management
 - **App Control**: Deep integration with native macOS applications
 - **Workflow Automation**: Multi-step task automation with conditional logic
@@ -236,7 +234,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **OpenAI** for GPT models and API
-- **Anthropic** for Claude AI capabilities  
+- **Anthropic** for Claude AI capabilities
 - **Mistral AI** for open-source AI models
 - **Ollama** for local AI processing
 - **Apple** for excellent SwiftUI and macOS frameworks
