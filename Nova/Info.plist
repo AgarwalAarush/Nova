@@ -1,3 +1,55 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e59d408239b9d2ba7dfad212c5d8a394d8f75e86361be49b58247028fac9144a
-size 2025
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Nova needs microphone access to enable voice dictation for your conversations with the AI assistant.</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Nova needs Apple Events access to automate system functions like controlling brightness, managing applications, and resizing windows.</string>
+	<key>NSSystemAdministrationUsageDescription</key>
+	<string>Nova may need administrator privileges for certain system automation tasks like brightness control and system sleep functions.</string>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>Nova needs screen recording access to capture screenshots for AI analysis and automation workflows.</string>
+	<key>BuildMachineOSBuild</key>
+		<string>24F74</string>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>en</string>
+		<key>CFBundleExecutable</key>
+		<string>Nova</string>
+		<key>CFBundleIdentifier</key>
+		<string>agarwalaarush.Nova</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>Nova</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0</string>
+		<key>CFBundleSupportedPlatforms</key>
+		<array>
+			<string>MacOSX</string>
+		</array>
+		<key>CFBundleVersion</key>
+		<string>1</string>
+		<key>DTCompiler</key>
+		<string>com.apple.compilers.llvm.clang.1_0</string>
+		<key>DTPlatformBuild</key>
+		<string>24F74</string>
+		<key>DTPlatformName</key>
+		<string>macosx</string>
+		<key>DTPlatformVersion</key>
+		<string>15.5</string>
+		<key>DTSDKBuild</key>
+		<string>24F74</string>
+		<key>DTSDKName</key>
+		<string>macosx15.5</string>
+		<key>DTXcode</key>
+		<string>1640</string>
+		<key>DTXcodeBuild</key>
+		<string>16F6</string>
+		<key>LSMinimumSystemVersion</key>
+		<string>15.5</string>
+	</dict>
+</dict>
+</plist>

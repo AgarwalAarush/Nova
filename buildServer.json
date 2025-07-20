@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1dd2ab60c691e3f8208cf3b4e08c665d727d8692795ab7ee0a9f5ec162b9fdc7
-size 458
+{
+	"name": "xcode build server",
+	"version": "0.2",
+	"bspVersion": "2.0",
+	"languages": [
+		"c",
+		"cpp",
+		"objective-c",
+		"objective-cpp",
+		"swift"
+	],
+	"argv": [
+		"/opt/homebrew/bin/xcode-build-server"
+	],
+	"workspace": "/Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/aarushagarwal/Library/Developer/Xcode/DerivedData/Nova-etohmjykrphuycgclskkxugkysif",
+	"scheme": "Nova",
+	"kind": "xcode"
+}

@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:efde6dfe1f86793f7b526337f390ab1d00a6d877778a24422eef127ddc00defa
-size 288
+//
+//  NovaTests.swift
+//  NovaTests
+//
+//  Created by Aarush Agarwal on 7/10/25.
+//
+
+import Testing
+@testable import Nova
+
+struct NovaTests {
+
+    @Test func example() async throws {
+        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    }
+
+}

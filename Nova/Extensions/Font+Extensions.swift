@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b408fd53407439bb694e2f4bc0873d9a26e33d10999d7d8752a20b63845ab196
-size 418
+//
+//  Font+Extensions.swift
+//  Nova
+//
+//  Created by Aarush Agarwal on 7/11/25.
+//
+
+import SwiftUI
+
+extension Font {
+    static func clashGrotesk(size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        return Font.custom("Clash Grotesk Variable", size: size)
+    }
+    
+    static func clashGroteskFixed(size: CGFloat) -> Font {
+        return Font.custom("Clash Grotesk Variable", fixedSize: size)
+    }
+}

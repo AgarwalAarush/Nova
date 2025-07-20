@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ddc5782913fb88e82c203f3a2751071336d8e7f2d8dbf498d9ffa50f7856052e
-size 715
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>dateCreated</key>
+	<date>2025-07-20T02:25:36Z</date>
+	<key>externalLocations</key>
+	<array/>
+	<key>rootId</key>
+	<dict>
+		<key>hash</key>
+		<string>0~-h_AedWd8u9Q4c7xTSmuzSeIgiV6Mb01ytJDDOBb9icpuIJq8Y9VZm9ZBytjcknMJhqkW6pM8C_4tjyvfY8dKw==</string>
+	</dict>
+	<key>storage</key>
+	<dict>
+		<key>backend</key>
+		<string>fileBacked2</string>
+		<key>compression</key>
+		<string>standard</string>
+	</dict>
+	<key>version</key>
+	<dict>
+		<key>major</key>
+		<integer>3</integer>
+		<key>minor</key>
+		<integer>53</integer>
+	</dict>
+</dict>
+</plist>

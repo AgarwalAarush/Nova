@@ -1,3 +1,753 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:abadd629b30c793304851289af9e622f1928078b6191818f75706cfa0c9e5cd2
-size 29556
+{
+    "version": "1.0",
+    "description": "Available automation tools for macOS system control",
+    "categories": {
+        "permissions": {
+            "name": "Permission Management",
+            "description": "Functions for managing automation permissions",
+            "tools": [
+                {
+                    "name": "requestPermissions",
+                    "description": "Request all required permissions for automation",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Bool",
+                        "description": "True if basic permissions are granted"
+                    },
+                    "async": true
+                },
+                {
+                    "name": "checkPermissionStatus",
+                    "description": "Check current permission status",
+                    "parameters": [],
+                    "returns": {
+                        "type": "AutomationPermissions",
+                        "description": "Current permission status for all automation features"
+                    },
+                    "async": true
+                }
+            ]
+        },
+        "display": {
+            "name": "Display Management",
+            "description": "Functions for controlling displays and brightness",
+            "tools": [
+                {
+                    "name": "setBrightness",
+                    "description": "Set display brightness level",
+                    "parameters": [
+                        {
+                            "name": "level",
+                            "type": "Float",
+                            "description": "Brightness level (0.0 to 1.0)",
+                            "required": true,
+                            "constraints": {
+                                "minimum": 0.0,
+                                "maximum": 1.0
+                            }
+                        },
+                        {
+                            "name": "displayID",
+                            "type": "UInt32",
+                            "description": "Specific display ID (optional, defaults to main display)",
+                            "required": false
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getBrightness",
+                    "description": "Get current display brightness level",
+                    "parameters": [
+                        {
+                            "name": "displayID",
+                            "type": "UInt32",
+                            "description": "Specific display ID (optional, defaults to main display)",
+                            "required": false
+                        }
+                    ],
+                    "returns": {
+                        "type": "Float",
+                        "description": "Current brightness level (0.0 to 1.0)"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getDisplayInfo",
+                    "description": "Get information about all available displays",
+                    "parameters": [],
+                    "returns": {
+                        "type": "[DisplayInfo]",
+                        "description": "Array of display information objects"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "setDisplayResolution",
+                    "description": "Set display resolution",
+                    "parameters": [
+                        {
+                            "name": "size",
+                            "type": "CGSize",
+                            "description": "New resolution size",
+                            "required": true,
+                            "properties": {
+                                "width": "CGFloat",
+                                "height": "CGFloat"
+                            }
+                        },
+                        {
+                            "name": "displayID",
+                            "type": "UInt32",
+                            "description": "Specific display ID (optional, defaults to main display)",
+                            "required": false
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        },
+        "application": {
+            "name": "Application Management",
+            "description": "Functions for managing applications",
+            "tools": [
+                {
+                    "name": "launchApplication",
+                    "description": "Launch an application by bundle identifier",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier (e.g., 'com.apple.finder')",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "quitApplication",
+                    "description": "Quit an application",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier",
+                            "required": true
+                        },
+                        {
+                            "name": "force",
+                            "type": "Bool",
+                            "description": "Force quit if true, graceful quit if false",
+                            "required": false,
+                            "default": false
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "activateApplication",
+                    "description": "Bring an application to the foreground",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "hideApplication",
+                    "description": "Hide an application",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getRunningApplications",
+                    "description": "Get list of all running applications",
+                    "parameters": [],
+                    "returns": {
+                        "type": "[RunningApplication]",
+                        "description": "Array of running application objects"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "isApplicationRunning",
+                    "description": "Check if an application is currently running",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Bool",
+                        "description": "True if application is running"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        },
+        "window": {
+            "name": "Window Management",
+            "description": "Functions for managing windows",
+            "tools": [
+                {
+                    "name": "resizeWindow",
+                    "description": "Resize a window to specified dimensions",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier",
+                            "required": true
+                        },
+                        {
+                            "name": "size",
+                            "type": "CGSize",
+                            "description": "New window size",
+                            "required": true,
+                            "properties": {
+                                "width": "CGFloat",
+                                "height": "CGFloat"
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "moveWindow",
+                    "description": "Move a window to specified position",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier",
+                            "required": true
+                        },
+                        {
+                            "name": "position",
+                            "type": "CGPoint",
+                            "description": "New window position",
+                            "required": true,
+                            "properties": {
+                                "x": "CGFloat",
+                                "y": "CGFloat"
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "minimizeWindow",
+                    "description": "Minimize a window",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "maximizeWindow",
+                    "description": "Maximize a window",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "closeWindow",
+                    "description": "Close a window",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getVisibleWindows",
+                    "description": "Get list of all visible windows",
+                    "parameters": [],
+                    "returns": {
+                        "type": "[WindowInfo]",
+                        "description": "Array of window information objects"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getWindowsForApplication",
+                    "description": "Get all windows for a specific application",
+                    "parameters": [
+                        {
+                            "name": "bundleIdentifier",
+                            "type": "String",
+                            "description": "Application bundle identifier",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "[WindowInfo]",
+                        "description": "Array of window information objects for the application"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        },
+        "system": {
+            "name": "System Control",
+            "description": "Functions for system-level control",
+            "tools": [
+                {
+                    "name": "setSystemVolume",
+                    "description": "Set system volume level",
+                    "parameters": [
+                        {
+                            "name": "level",
+                            "type": "Float",
+                            "description": "Volume level (0.0 to 1.0)",
+                            "required": true,
+                            "constraints": {
+                                "minimum": 0.0,
+                                "maximum": 1.0
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getSystemVolume",
+                    "description": "Get current system volume information",
+                    "parameters": [],
+                    "returns": {
+                        "type": "SystemVolume",
+                        "description": "System volume information including level and mute status"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "sleepSystem",
+                    "description": "Put the system to sleep",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "lockScreen",
+                    "description": "Lock the screen",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "showDesktop",
+                    "description": "Show desktop (hide all windows)",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        },
+        "screenshot": {
+            "name": "Screenshot Management",
+            "description": "Functions for capturing screenshots",
+            "tools": [
+                {
+                    "name": "captureScreen",
+                    "description": "Capture a screenshot of the entire screen",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ScreenshotInfo",
+                        "description": "Screenshot information including image data"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "captureWindow",
+                    "description": "Capture a screenshot of a specific window",
+                    "parameters": [
+                        {
+                            "name": "windowID",
+                            "type": "UInt32",
+                            "description": "Window identifier to capture",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "ScreenshotInfo",
+                        "description": "Screenshot information including image data"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "captureSelection",
+                    "description": "Capture a screenshot of a user-selected area",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ScreenshotInfo",
+                        "description": "Screenshot information including image data"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getLastScreenshot",
+                    "description": "Get the last captured screenshot",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ScreenshotInfo?",
+                        "description": "Last screenshot information or nil if none available"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        },
+        "ai": {
+             "name": "AI Model Requests",
+             "description": "Functions for making requests to AI models",
+             "tools": [
+                 {
+                     "name": "requestModel",
+                     "description": "Make a request to an AI model with text and optional image input",
+                     "parameters": [
+                         {
+                             "name": "prompt",
+                             "type": "String",
+                             "description": "Text prompt to send to the model",
+                             "required": true
+                         },
+                         {
+                             "name": "image",
+                             "type": "NSImage",
+                             "description": "Optional image to include with the request",
+                             "required": false
+                         },
+                         {
+                             "name": "modelId",
+                             "type": "String",
+                             "description": "Specific model ID to use (optional, uses default if not specified)",
+                             "required": false
+                         },
+                         {
+                             "name": "maxTokens",
+                             "type": "Int",
+                             "description": "Maximum number of tokens to generate",
+                             "required": false,
+                             "default": 4000
+                         },
+                         {
+                             "name": "temperature",
+                             "type": "Float",
+                             "description": "Temperature for response generation (0.0 to 1.0)",
+                             "required": false,
+                             "default": 0.7,
+                             "constraints": {
+                                 "minimum": 0.0,
+                                 "maximum": 1.0
+                             }
+                         }
+                     ],
+                     "returns": {
+                         "type": "String",
+                         "description": "Generated text response from the AI model"
+                     },
+                     "async": true,
+                     "throws": true
+                 }
+             ]
+         },
+         "clipboard": {
+             "name": "Clipboard Management",
+             "description": "Functions for managing clipboard content",
+             "tools": [
+                {
+                    "name": "getClipboardContent",
+                    "description": "Get current clipboard text content",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ClipboardContent",
+                        "description": "Clipboard content information"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getClipboardContentWithMetadata",
+                    "description": "Get clipboard content with detailed metadata",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ClipboardContent",
+                        "description": "Clipboard content with metadata information"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "getClipboardImage",
+                    "description": "Get clipboard image content",
+                    "parameters": [],
+                    "returns": {
+                        "type": "ClipboardImage?",
+                        "description": "Clipboard image or nil if no image available"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "setClipboardContent",
+                    "description": "Set clipboard text content",
+                    "parameters": [
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "description": "Text content to set in clipboard",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "setClipboardImage",
+                    "description": "Set clipboard image content",
+                    "parameters": [
+                        {
+                            "name": "image",
+                            "type": "NSImage",
+                            "description": "Image to set in clipboard",
+                            "required": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "clearClipboard",
+                    "description": "Clear all clipboard content",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
+                    "name": "hasClipboardContent",
+                    "description": "Check if clipboard has content",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Bool",
+                        "description": "True if clipboard has content"
+                    },
+                    "async": true,
+                    "throws": true
+                }
+            ]
+        }
+    },
+    "data_types": {
+        "AutomationPermissions": {
+            "description": "Permission status for automation features",
+            "properties": {
+                "accessibility": "PermissionStatus",
+                "systemEvents": "PermissionStatus",
+                "adminPrivileges": "PermissionStatus",
+                "screenRecording": "PermissionStatus",
+                "hasBasicAccess": "Bool",
+                "hasFullAccess": "Bool",
+                "hasScreenshotAccess": "Bool",
+                "hasClipboardAccess": "Bool"
+            }
+        },
+        "PermissionStatus": {
+            "description": "Status of a specific permission",
+            "enum": ["notDetermined", "denied", "authorized", "restricted"]
+        },
+        "DisplayInfo": {
+            "description": "Information about a display",
+            "properties": {
+                "id": "UInt32",
+                "bounds": "CGRect",
+                "brightness": "Float?",
+                "isMain": "Bool",
+                "name": "String?",
+                "colorSpace": "String?",
+                "refreshRate": "Double?"
+            }
+        },
+        "RunningApplication": {
+            "description": "Information about a running application",
+            "properties": {
+                "id": "Int32",
+                "bundleIdentifier": "String?",
+                "localizedName": "String?",
+                "processIdentifier": "Int32",
+                "isActive": "Bool",
+                "isHidden": "Bool",
+                "activationPolicy": "ApplicationActivationPolicy"
+            }
+        },
+        "WindowInfo": {
+            "description": "Information about a window",
+            "properties": {
+                "id": "UInt32",
+                "title": "String?",
+                "ownerName": "String?",
+                "ownerPID": "Int32",
+                "bounds": "CGRect",
+                "layer": "Int",
+                "isOnScreen": "Bool",
+                "isMinimized": "Bool",
+                "applicationBundleIdentifier": "String?"
+            }
+        },
+        "SystemVolume": {
+            "description": "System volume information",
+            "properties": {
+                "level": "Float",
+                "isMuted": "Bool",
+                "hasHardwareControl": "Bool"
+            }
+        },
+        "ScreenshotInfo": {
+            "description": "Screenshot information",
+            "properties": {
+                "image": "NSImage",
+                "timestamp": "Date",
+                "displayID": "UInt32?",
+                "windowID": "UInt32?",
+                "bounds": "CGRect"
+            }
+        },
+        "ClipboardContent": {
+            "description": "Clipboard content information",
+            "properties": {
+                "content": "String",
+                "type": "String",
+                "timestamp": "Date",
+                "hasImage": "Bool"
+            }
+        },
+        "ClipboardImage": {
+            "description": "Clipboard image information",
+            "properties": {
+                "image": "NSImage",
+                "timestamp": "Date"
+            }
+        }
+    }
+}

@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2f87f6a15b625fae43799a606fc116f05ce278ced85744a0b8b58858bceb8d31
-size 841
+//
+//  OllamaConfiguration.swift
+//  Nova
+//
+//  Created by Aarush Agarwal on 7/11/25.
+//
+
+import Foundation
+
+struct OllamaConfiguration {
+    static let shared = OllamaConfiguration()
+    
+    let baseURL: URL
+    let defaultModel: String
+    let timeout: TimeInterval
+    let defaultOptions: OllamaOptions
+    
+    private init() {
+        self.baseURL = URL(string: "http://localhost:11434")!
+        self.defaultModel = "gemma3:4b"
+        self.timeout = 300.0 // 5 minutes to handle model loading
+        self.defaultOptions = OllamaOptions.default
+    }
+    
+    var chatEndpoint: URL {
+        baseURL.appendingPathComponent("api/chat")
+    }
+    
+    var generateEndpoint: URL {
+        baseURL.appendingPathComponent("api/generate")
+    }
+    
+    var modelsEndpoint: URL {
+        baseURL.appendingPathComponent("api/tags")
+    }
+}

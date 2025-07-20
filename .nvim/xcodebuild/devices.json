@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0a61af5298d684dbbf4d2a0c65b21c1cfa27ef6abf971838b0109f99de263906
-size 206
+{"projectFile": "/Users/aarushagarwal/Documents/Programming/Nova/Nova.xcodeproj", "scheme": "Nova", "devices": [{"id": "00006000-000220920251801E", "name": "My Mac", "arch": "arm64", "platform": "macOS"}]}

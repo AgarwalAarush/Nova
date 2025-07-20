@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1945f723eb58495c60411ff19bbdd8d143229f3a41612b978145f851f46d9fde
-size 624
+//
+//  ChatMessage.swift
+//  Nova
+//
+//  Created by Aarush Agarwal on 7/11/25.
+//
+
+import Foundation
+
+struct ChatMessage: Identifiable, Codable {
+    let id = UUID()
+    var content: String
+    let isUser: Bool
+    let timestamp: Date
+    var isStreaming: Bool
+    
+    init(content: String, isUser: Bool, isStreaming: Bool = false) {
+        self.content = content
+        self.isUser = isUser
+        self.timestamp = Date()
+        self.isStreaming = isStreaming
+    }
+    
+    // Codable support - automatic for struct
+    enum CodingKeys: String, CodingKey {
+        case content, isUser, timestamp, isStreaming
+    }
+}
