@@ -2,7 +2,8 @@
 <div align="center">
 
 <img src="Nova/Assets.xcassets/AppIcon.appiconset/AppIcon-4%20(dragged).png" alt="Nova App Icon" width="128" height="128">
-# Nova AI Assistant
+
+<h1>Nova AI Assistant</h1>
 
 *Nova - Your intelligent macOS AI assistant with comprehensive system automation*
 
