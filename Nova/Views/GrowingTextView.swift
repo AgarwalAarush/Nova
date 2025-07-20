@@ -13,12 +13,16 @@ public struct GrowingTextView: NSViewRepresentable {
     @Binding var height: CGFloat
     @Binding var isPlaceholderVisible: Bool
     let onSend: () -> Void
+    let onEscapeKey: (() -> Void)?
+    let onFocusChange: ((Bool) -> Void)?
     
-    public init(text: Binding<String>, height: Binding<CGFloat>, isPlaceholderVisible: Binding<Bool>, onSend: @escaping () -> Void) {
+    public init(text: Binding<String>, height: Binding<CGFloat>, isPlaceholderVisible: Binding<Bool>, onSend: @escaping () -> Void, onEscapeKey: (() -> Void)? = nil, onFocusChange: ((Bool) -> Void)? = nil) {
         self._text = text
         self._height = height
         self._isPlaceholderVisible = isPlaceholderVisible
         self.onSend = onSend
+        self.onEscapeKey = onEscapeKey
+        self.onFocusChange = onFocusChange
     }
 
     private var font: NSFont {
@@ -206,6 +210,8 @@ public struct GrowingTextView: NSViewRepresentable {
                     height: $height,
                     isPlaceholderVisible: $isPlaceholderVisible,
                     onSend: onSend,
+                    onEscapeKey: onEscapeKey,
+                    onFocusChange: onFocusChange,
                     owner: self)
     }
 
@@ -214,6 +220,8 @@ public struct GrowingTextView: NSViewRepresentable {
         private let height: Binding<CGFloat>
         private let isPlaceholderVisible: Binding<Bool>
         private let onSend: () -> Void
+        private let onEscapeKey: (() -> Void)?
+        private let onFocusChange: ((Bool) -> Void)?
         private let owner: GrowingTextView
         weak var textView: NSTextView?
 
@@ -221,12 +229,16 @@ public struct GrowingTextView: NSViewRepresentable {
              height: Binding<CGFloat>,
              isPlaceholderVisible: Binding<Bool>,
              onSend: @escaping () -> Void,
+             onEscapeKey: (() -> Void)?,
+             onFocusChange: ((Bool) -> Void)?,
              owner: GrowingTextView)
         {
             self.text = text
             self.height = height
             self.isPlaceholderVisible = isPlaceholderVisible
             self.onSend = onSend
+            self.onEscapeKey = onEscapeKey
+            self.onFocusChange = onFocusChange
             self.owner = owner
         }
         
@@ -255,8 +267,32 @@ public struct GrowingTextView: NSViewRepresentable {
                     textView.insertNewline(nil)
                     return true
                 }
+            } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+                // Handle escape key
+                handleEscapeKey(in: textView)
+                return true
             }
             return false
+        }
+        
+        // MARK: - Focus Management
+        
+        private func handleEscapeKey(in textView: NSTextView) {
+            // Remove focus from input
+            if textView.window?.firstResponder == textView {
+                textView.window?.makeFirstResponder(nil)
+            }
+            
+            // Notify parent that escape was pressed (after focus change)
+            onEscapeKey?()
+        }
+        
+        public func textViewDidBecomeFirstResponder(_ textView: NSTextView) {
+            onFocusChange?(true)
+        }
+        
+        public func textViewDidResignFirstResponder(_ textView: NSTextView) {
+            onFocusChange?(false)
         }
     }
 }

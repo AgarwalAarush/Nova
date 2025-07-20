@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import AppKit
 
 struct ChatView: View {
     @ObservedObject var viewModel: ChatViewModel
     @EnvironmentObject var whisperService: WhisperService
+    @StateObject private var appConfig = AppConfig.shared
     @State private var showingSettings = false
     
     var body: some View {
@@ -31,6 +33,18 @@ struct ChatView: View {
         .toolbar {
             ToolbarItem(id: "flex") {
                 Spacer()
+            }
+            
+            ToolbarItem {
+                Button(action: {
+                    appConfig.enableWindowPinning.toggle()
+                }) {
+                    SwiftUI.Image(systemName: appConfig.enableWindowPinning ? "pin.fill" : "pin")
+                        .font(AppFonts.callout)
+                        .foregroundColor(appConfig.enableWindowPinning ? AppColors.accentBlue : AppColors.secondaryText)
+                }
+                .buttonStyle(.plain)
+                .help(appConfig.enableWindowPinning ? "Unpin window" : "Pin window to top")
             }
             
             ToolbarItem {
@@ -57,5 +71,46 @@ struct ChatView: View {
                 .help("Settings")
             }
         }
+        .background(
+            KeyEventHandler { event in
+                if event.keyCode == 53 && event.type == .keyDown { // Escape key code
+                    // Only handle escape globally when input is not focused
+                    if !viewModel.isInputFocused {
+                        viewModel.handleEscapeKey()
+                        return true
+                    }
+                }
+                return false
+            }
+        )
+    }
+}
+
+// MARK: - Key Event Handler
+
+struct KeyEventHandler: NSViewRepresentable {
+    let onKeyEvent: (NSEvent) -> Bool
+    
+    func makeNSView(context: Context) -> KeyEventView {
+        let view = KeyEventView()
+        view.onKeyEvent = onKeyEvent
+        return view
+    }
+    
+    func updateNSView(_ nsView: KeyEventView, context: Context) {
+        nsView.onKeyEvent = onKeyEvent
+    }
+}
+
+class KeyEventView: NSView {
+    var onKeyEvent: ((NSEvent) -> Bool)?
+    
+    override var acceptsFirstResponder: Bool { true }
+    
+    override func keyDown(with event: NSEvent) {
+        if let handler = onKeyEvent, handler(event) {
+            return // Event was handled
+        }
+        super.keyDown(with: event)
     }
 }

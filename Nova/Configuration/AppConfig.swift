@@ -175,6 +175,9 @@ class AppConfig: ObservableObject {
     /// User Preferences (Memory) Configuration
     @Published var userPreferences: [String] = []
     
+    /// Window Management Configuration
+    @Published var enableWindowPinning: Bool = false
+    
     // MARK: - Private Properties
     
     private let configFileName = "AppConfig.json"
@@ -240,6 +243,7 @@ class AppConfig: ObservableObject {
             allowSystemControl = config.allowSystemControl
             automationTimeoutSeconds = config.automationTimeoutSeconds
             userPreferences = config.userPreferences
+            enableWindowPinning = config.enableWindowPinning
             
             print("📝 ✅ Configuration loaded from: \(configFileURL.path)")
             
@@ -273,7 +277,8 @@ class AppConfig: ObservableObject {
             allowWindowManagement: allowWindowManagement,
             allowSystemControl: allowSystemControl,
             automationTimeoutSeconds: automationTimeoutSeconds,
-            userPreferences: userPreferences
+            userPreferences: userPreferences,
+            enableWindowPinning: enableWindowPinning
         )
         
         do {
@@ -311,6 +316,7 @@ class AppConfig: ObservableObject {
         allowSystemControl = false
         automationTimeoutSeconds = 10.0
         userPreferences = []
+        enableWindowPinning = false
         
         saveConfiguration()
     }
@@ -644,6 +650,7 @@ private struct ConfigData: Codable {
     let allowSystemControl: Bool
     let automationTimeoutSeconds: Double
     let userPreferences: [String]
+    let enableWindowPinning: Bool
 }
 
 // MARK: - Extensions

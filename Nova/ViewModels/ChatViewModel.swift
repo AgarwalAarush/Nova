@@ -30,6 +30,9 @@ class ChatViewModel: ObservableObject {
     @Published var isVoiceActive: Bool = false
     @Published var continuousAudioLevel: Float = 0.0
     
+    // Escape key navigation state
+    @Published var isInputFocused: Bool = false
+    
     let aiServiceRouter: AIServiceRouter
     private var audioRecorder: AudioRecorderService?
     private var whisperService: WhisperService?
@@ -39,6 +42,7 @@ class ChatViewModel: ObservableObject {
     // Continuous audio monitoring
     private var continuousAudioService: ContinuousAudioService?
     private var cancellables = Set<AnyCancellable>()
+    
     
     init(aiServiceRouter: AIServiceRouter? = nil) {
         // Initialize AI service router - it will create its own automation service
@@ -205,6 +209,23 @@ class ChatViewModel: ObservableObject {
     @MainActor
     func toggleViewMode() {
         viewMode = viewMode == .normal ? .compactVoice : .normal
+    }
+    
+    // MARK: - Escape Key Navigation
+    
+    @MainActor
+    func handleEscapeKey() {
+        // If input is not focused, switch to compact voice view
+        if !isInputFocused && viewMode == .normal {
+            toggleViewMode()
+        }
+        // Note: If input IS focused, GrowingTextView handles removing focus
+        // and will call this method again after focus is removed
+    }
+    
+    @MainActor
+    func setInputFocus(_ focused: Bool) {
+        isInputFocused = focused
     }
     
     @MainActor

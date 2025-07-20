@@ -11,6 +11,7 @@ import AppKit
 struct CompactVoiceView: View {
     @ObservedObject var viewModel: ChatViewModel
     @EnvironmentObject var whisperService: WhisperService
+    @StateObject private var appConfig = AppConfig.shared
     @State private var originalStyleMask: NSWindow.StyleMask?
     @State private var showModelSelector: Bool = false
     
@@ -62,6 +63,17 @@ struct CompactVoiceView: View {
                 isTranscribing: viewModel.isTranscribing,
                 modelState: whisperService.modelState
             )
+            
+            // Pin toggle button
+            Button(action: {
+                appConfig.enableWindowPinning.toggle()
+            }) {
+                SwiftUI.Image(systemName: appConfig.enableWindowPinning ? "pin.fill" : "pin")
+                    .font(AppFonts.callout)
+                    .foregroundColor(appConfig.enableWindowPinning ? AppColors.accentBlue : AppColors.secondaryText)
+            }
+            .buttonStyle(.plain)
+            .help(appConfig.enableWindowPinning ? "Unpin window" : "Pin window to top")
             
             Spacer()
             

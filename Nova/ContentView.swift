@@ -13,6 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var whisperService: WhisperService
     @EnvironmentObject var aiServiceRouter: AIServiceRouter
     @StateObject private var chatViewModel: ChatViewModel
+    @StateObject private var appConfig = AppConfig.shared
     @State private var currentHeight: CGFloat = 600
     
     init() {
@@ -59,6 +60,7 @@ struct ContentView: View {
         }
         .animation(.easeInOut(duration: 0.3), value: chatViewModel.viewMode)
         .background(AppColors.background)
+        .windowPinning(isPinned: $appConfig.enableWindowPinning)
         .onAppear {
             chatViewModel.setWhisperService(whisperService)
             chatViewModel.setAIServiceRouter(aiServiceRouter)

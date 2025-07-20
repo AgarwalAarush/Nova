@@ -34,7 +34,13 @@ struct InputBarView: View {
                         text: $currentInput,
                         height: $textHeight,
                         isPlaceholderVisible: $isPlaceholderVisible,
-                        onSend: onSend
+                        onSend: onSend,
+                        onEscapeKey: {
+                            chatViewModel.handleEscapeKey()
+                        },
+                        onFocusChange: { focused in
+                            chatViewModel.setInputFocus(focused)
+                        }
                     )
                     .focusable()
                     .frame(height: textHeight)
