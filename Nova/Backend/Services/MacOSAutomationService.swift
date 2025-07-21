@@ -250,7 +250,63 @@ final class MacOSAutomationService: SystemAutomationService {
             throw AutomationError.accessibilityNotEnabled
         }
         
-        throw AutomationError.operationNotSupported(operation: "Window maximizing requires additional Accessibility API implementation")
+        let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] ?? []
+        
+        guard let windowDict = windowList.first(where: { dict in
+            (dict[kCGWindowNumber as String] as? UInt32) == windowID
+        }) else {
+            throw AutomationError.systemError(underlying: NSError(domain: "WindowNotFound", code: 1, userInfo: [NSLocalizedDescriptionKey: "Window not found"]))
+        }
+        
+        guard let ownerPID = windowDict[kCGWindowOwnerPID as String] as? Int32 else {
+            throw AutomationError.systemError(underlying: NSError(domain: "WindowOwnerNotFound", code: 1, userInfo: [NSLocalizedDescriptionKey: "Window owner not found"]))
+        }
+        
+        let appRef = AXUIElementCreateApplication(pid_t(ownerPID))
+        var windows: CFTypeRef?
+        let result = AXUIElementCopyAttributeValue(appRef, kAXWindowsAttribute as CFString, &windows)
+        
+        guard result == AXError.success,
+              let windowList = windows as? [AXUIElement] else {
+            throw AutomationError.systemError(underlying: NSError(domain: "AccessibilityError", code: Int(result.rawValue), userInfo: [NSLocalizedDescriptionKey: "Failed to get windows"]))
+        }
+        
+        // Find the specific window by matching position and size
+        guard let targetWindow = windowList.first(where: { window in
+            var position: CFTypeRef?
+            var size: CFTypeRef?
+            
+            AXUIElementCopyAttributeValue(window, kAXPositionAttribute as CFString, &position)
+            AXUIElementCopyAttributeValue(window, kAXSizeAttribute as CFString, &size)
+            
+            if let pos = position, let sz = size {
+                var cgPos = CGPoint.zero
+                var cgSize = CGSize.zero
+                
+                AXValueGetValue(pos as! AXValue, .cgPoint, &cgPos)
+                AXValueGetValue(sz as! AXValue, .cgSize, &cgSize)
+                
+                let windowBounds = CGRect(origin: cgPos, size: cgSize)
+                if let dictBounds = windowDict[kCGWindowBounds as String] as? [String: Any],
+                   let originalBounds = CGRect(dictionaryRepresentation: dictBounds as CFDictionary) {
+                    return windowBounds.origin.x == originalBounds.origin.x && 
+                           windowBounds.origin.y == originalBounds.origin.y &&
+                           windowBounds.size.width == originalBounds.size.width &&
+                           windowBounds.size.height == originalBounds.size.height
+                }
+            }
+            return false
+        }) else {
+            // If we can't find exact match, use the first window
+            guard let firstWindow = windowList.first else {
+                throw AutomationError.systemError(underlying: NSError(domain: "NoWindowsFound", code: 1, userInfo: [NSLocalizedDescriptionKey: "No windows found for application"]))
+            }
+            try await maximizeWindowElement(firstWindow)
+            return
+        }
+        
+        try await maximizeWindowElement(targetWindow)
+        logger.info("Window \(windowID) maximized")
     }
     
     func closeWindow(_ windowID: UInt32) async throws {
@@ -510,5 +566,61 @@ private extension MacOSAutomationService {
     
     internal func clearUserPreferences() async throws {
         AppConfig.shared.clearUserPreferences()
+    }
+    
+    // MARK: - Window Management Helpers
+    
+    private func maximizeWindowElement(_ window: AXUIElement) async throws {
+        // Get the main display's visible frame
+        guard let screen = NSScreen.main else {
+            throw AutomationError.systemError(underlying: NSError(domain: "ScreenNotFound", code: 1, userInfo: [NSLocalizedDescriptionKey: "Main screen not found"]))
+        }
+        
+        let screenFrame = screen.visibleFrame
+        var position = CGPoint(x: screenFrame.origin.x, y: screenFrame.origin.y)
+        var size = CGSize(width: screenFrame.size.width, height: screenFrame.size.height)
+        
+        // Create AXValue objects for position and size
+        guard let positionValue = AXValueCreate(.cgPoint, &position),
+              let sizeValue = AXValueCreate(.cgSize, &size) else {
+            throw AutomationError.systemError(underlying: NSError(domain: "AXValueCreation", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to create AXValue objects"]))
+        }
+        
+        // Set position
+        let positionResult = AXUIElementSetAttributeValue(window, kAXPositionAttribute as CFString, positionValue)
+        if positionResult != AXError.success {
+            throw AutomationError.systemError(underlying: NSError(domain: "AccessibilityError", code: Int(positionResult.rawValue), userInfo: [NSLocalizedDescriptionKey: "Failed to set window position"]))
+        }
+        
+        // Set size
+        let sizeResult = AXUIElementSetAttributeValue(window, kAXSizeAttribute as CFString, sizeValue)
+        if sizeResult != AXError.success {
+            throw AutomationError.systemError(underlying: NSError(domain: "AccessibilityError", code: Int(sizeResult.rawValue), userInfo: [NSLocalizedDescriptionKey: "Failed to set window size"]))
+        }
+    }
+    
+    internal func maximizeFrontmostWindow() async throws {
+        guard permissions.accessibility == .authorized else {
+            throw AutomationError.accessibilityNotEnabled
+        }
+        
+        guard let frontmostApp = NSWorkspace.shared.frontmostApplication else {
+            throw AutomationError.systemError(underlying: NSError(domain: "NoFrontmostApp", code: 1, userInfo: [NSLocalizedDescriptionKey: "No frontmost application found"]))
+        }
+        
+        let appPID = frontmostApp.processIdentifier
+        let appRef = AXUIElementCreateApplication(appPID)
+        
+        var windows: CFTypeRef?
+        let result = AXUIElementCopyAttributeValue(appRef, kAXWindowsAttribute as CFString, &windows)
+        
+        guard result == AXError.success,
+              let windowList = windows as? [AXUIElement],
+              let window = windowList.first else {
+            throw AutomationError.systemError(underlying: NSError(domain: "AccessibilityError", code: Int(result.rawValue), userInfo: [NSLocalizedDescriptionKey: "Unable to get windows for frontmost application"]))
+        }
+        
+        try await maximizeWindowElement(window)
+        logger.info("Frontmost window maximized")
     }
 }

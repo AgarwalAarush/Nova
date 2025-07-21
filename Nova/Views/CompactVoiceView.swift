@@ -24,8 +24,6 @@ struct CompactVoiceView: View {
                 showModelSelector: $showModelSelector
             )
             
-            Spacer()
-            
             // Activity indicator or last response preview
             VStack {
                 if viewModel.isLoading {
@@ -44,7 +42,8 @@ struct CompactVoiceView: View {
                         .foregroundColor(AppColors.secondaryText.opacity(0.6))
                 }
             }
-            .frame(width: 24)
+
+            Spacer()
             
             // Continuous listening toggle button
             ContinuousListeningButton(
@@ -54,8 +53,6 @@ struct CompactVoiceView: View {
                 audioLevel: viewModel.continuousAudioLevel
             )
             
-            Spacer().frame(maxWidth: 8)
-            
             // Central dictation button
             DictationButton(
                 onDictationToggle: viewModel.toggleDictation,
@@ -63,7 +60,9 @@ struct CompactVoiceView: View {
                 isTranscribing: viewModel.isTranscribing,
                 modelState: whisperService.modelState
             )
-            
+
+            Spacer()
+
             // Pin toggle button
             Button(action: {
                 appConfig.enableWindowPinning.toggle()
@@ -74,8 +73,6 @@ struct CompactVoiceView: View {
             }
             .buttonStyle(.plain)
             .help(appConfig.enableWindowPinning ? "Unpin window" : "Pin window to top")
-            
-            Spacer()
             
             // Mode toggle button (expand to normal view)
             Button(action: {

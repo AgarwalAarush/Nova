@@ -35,6 +35,7 @@ enum WindowCommand {
     case move(windowID: UInt32, position: CGPoint)
     case minimize(windowID: UInt32)
     case maximize(windowID: UInt32)
+    case maximizeFrontmostWindow
     case close(windowID: UInt32)
     case getVisible
     case getForApplication(bundleIdentifier: String)

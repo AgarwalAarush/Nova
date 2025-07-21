@@ -34,6 +34,7 @@ protocol SystemAutomationService: ObservableObject {
     func moveWindow(_ windowID: UInt32, to position: CGPoint) async throws
     func minimizeWindow(_ windowID: UInt32) async throws
     func maximizeWindow(_ windowID: UInt32) async throws
+    func maximizeFrontmostWindow() async throws
     func closeWindow(_ windowID: UInt32) async throws
     func getVisibleWindows() async throws -> [WindowInfo]
     func getWindowsForApplication(_ bundleIdentifier: String) async throws -> [WindowInfo]
@@ -161,6 +162,9 @@ extension SystemAutomationService {
             return .success
         case .maximize(let windowID):
             try await maximizeWindow(windowID)
+            return .success
+        case .maximizeFrontmostWindow:
+            try await maximizeFrontmostWindow()
             return .success
         case .close(let windowID):
             try await closeWindow(windowID)

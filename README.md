@@ -9,9 +9,7 @@
 
 <!-- Demo Video Section -->
 ## 🎬 Demo Video
-> *Coming Soon - Demo video showcasing Nova's AI-powered automation and voice interaction capabilities*
-
-</div>
+[![Watch the video](https://img.youtube.com/vi/O1oNlkuyIBg/hqdefault.jpg)](https://www.youtube.com/watch?v=O1oNlkuyIBg)
 
 ---
 

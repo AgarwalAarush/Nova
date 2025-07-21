@@ -330,6 +330,17 @@
                     "throws": true
                 },
                 {
+                    "name": "maximizeFrontmostWindow",
+                    "description": "Maximize the frontmost (currently active) window",
+                    "parameters": [],
+                    "returns": {
+                        "type": "Void",
+                        "description": "No return value"
+                    },
+                    "async": true,
+                    "throws": true
+                },
+                {
                     "name": "closeWindow",
                     "description": "Close a window",
                     "parameters": [
