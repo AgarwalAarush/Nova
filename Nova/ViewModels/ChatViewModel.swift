@@ -226,6 +226,12 @@ class ChatViewModel: ObservableObject {
     }
     
     @MainActor
+    func handleCommandPKey() {
+        // Command+P toggles window pinning (always on top)
+        AppConfig.shared.enableWindowPinning.toggle()
+    }
+    
+    @MainActor
     func setInputFocus(_ focused: Bool) {
         isInputFocused = focused
     }

@@ -26,6 +26,7 @@ xcuserdata/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcscmblueprint
+.nvim/*
 
 # Xcode Schemes
 # Keep shared schemes (in xcshareddata), ignore user ones

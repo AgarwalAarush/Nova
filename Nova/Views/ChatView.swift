@@ -81,6 +81,13 @@ struct ChatView: View {
                     }
                     // Let plain Escape pass through to the text input to handle focus removal
                 }
+                if event.keyCode == 35 && event.type == .keyDown { // P key code
+                    if event.modifierFlags.contains(.command) {
+                        // Command+P: Toggle window pinning
+                        viewModel.handleCommandPKey()
+                        return true
+                    }
+                }
                 return false
             }
         )

@@ -129,6 +129,13 @@ struct CompactVoiceView: View {
                     }
                     // Let plain Escape pass through normally
                 }
+                if event.keyCode == 35 && event.type == .keyDown { // P key code
+                    if event.modifierFlags.contains(.command) {
+                        // Command+P: Toggle window pinning
+                        viewModel.handleCommandPKey()
+                        return true
+                    }
+                }
                 return false
             }
         )

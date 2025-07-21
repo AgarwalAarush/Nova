@@ -19,15 +19,27 @@ struct WindowLevelManager: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
-        DispatchQueue.main.async {
-            guard let window = nsView.window else { return }
+        guard let window = nsView.window else { 
+            // If window is not available, retry after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.updateNSView(nsView, context: context)
+            }
+            return 
+        }
+        
+        // Set window level based on pinning state
+        let newLevel: NSWindow.Level = isPinned ? .statusBar : .normal
+        
+        // Only update if the level actually changed to avoid unnecessary operations
+        if window.level != newLevel {
+            window.level = newLevel
             
-            // Set window level based on pinning state
-            window.level = isPinned ? .statusBar : .normal
-            
+            // Force window to update its position
             if isPinned {
-                print("📌 Window pinned to status bar level")
+                window.orderFront(nil)
+                print("📌 Window pinned to status bar level (always on top)")
             } else {
+                window.orderFront(nil)
                 print("📌 Window unpinned to normal level")
             }
         }
