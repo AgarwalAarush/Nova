@@ -24,12 +24,20 @@ enum AIMessageRole: String, Codable {
     case assistant = "assistant"
 }
 
-struct AIChatRequest {
+struct AIChatRequest: Encodable {
     let messages: [AIMessage]
     let model: String
     let stream: Bool
     let temperature: Double?
     let maxTokens: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case messages
+        case model
+        case stream
+        case temperature
+        case maxTokens
+    }
     
     init(messages: [AIMessage], model: String, stream: Bool = false, temperature: Double? = nil, maxTokens: Int? = nil) {
         self.messages = messages
@@ -37,6 +45,19 @@ struct AIChatRequest {
         self.stream = stream
         self.temperature = temperature
         self.maxTokens = maxTokens
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(messages, forKey: .messages)
+        try container.encode(model, forKey: .model)
+        try container.encode(stream, forKey: .stream)
+        if let temperature = temperature {
+            try container.encode(temperature, forKey: .temperature)
+        }
+        if let maxTokens = maxTokens {
+            try container.encode(maxTokens, forKey: .maxTokens)
+        }
     }
 }
 

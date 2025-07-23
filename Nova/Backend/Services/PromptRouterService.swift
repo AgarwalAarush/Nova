@@ -182,10 +182,16 @@ class PromptRouterService: PromptRouter {
         if !mistralKey.isEmpty {
             aiServices[.mistral] = MistralService(apiKey: mistralKey)
         }
+
+        let deepseekKey = config.getApiKey(for: .deepseek)
+        if !deepseekKey.isEmpty {
+            aiServices[.deepseek] = DeepSeekService(apiKey: deepseekKey)
+        }
     }
     
     /// Route a prompt to generate tool calls
     func routePrompt(_ prompt: String, config: AppConfig) async throws -> PromptRouterResponse {
+
         // Get the AI service for the current provider
         guard let aiService = aiServices[config.aiProvider] else {
             print("🚨 Service not available for provider \(config.aiProvider.displayName)")

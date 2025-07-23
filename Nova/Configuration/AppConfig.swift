@@ -59,6 +59,7 @@ enum AIProvider: String, CaseIterable, Codable {
     case mistral = "mistral"
     case grok = "grok"
     case gemini = "gemini"
+    case deepseek = "deepseek"
     
     var displayName: String {
         switch self {
@@ -68,13 +69,14 @@ enum AIProvider: String, CaseIterable, Codable {
         case .mistral: return "Mistral AI"
         case .grok: return "xAI Grok"
         case .gemini: return "Google Gemini"
+        case .deepseek: return "DeepSeek"
         }
     }
     
     var requiresApiKey: Bool {
         switch self {
         case .ollama: return false
-        case .openai, .claude, .mistral, .grok, .gemini: return true
+        case .openai, .claude, .mistral, .grok, .gemini, .deepseek: return true
         }
     }
     
@@ -116,6 +118,11 @@ enum AIProvider: String, CaseIterable, Codable {
                     AIModel(id: "mistral-medium-3", name: "mistral-medium-3", provider: .mistral, displayName: "Mistral Medium 3", description: "Frontier-class model with multimodal capabilities", supportsImageInput: true, powerRank: 13),
                     AIModel(id: "mistral-small-3.2", name: "mistral-small-3.2", provider: .mistral, displayName: "Mistral Small 3.2", description: "Small, updated model with image understanding", supportsImageInput: true, powerRank: 19),
                     AIModel(id: "voxtral-small", name: "voxtral-small", provider: .mistral, displayName: "Voxtral Small", description: "Audio input for instruction-based use cases", supportsImageInput: false, powerRank: 21)
+                ]
+            case .deepseek:
+                return [
+                    AIModel(id: "deepseek-chat", name: "deepseek-v3", provider: .deepseek, displayName: "DeepSeek V3", description: "Latest and most capable DeepSeek model (V3-0324)", isRecommended: true, supportsImageInput: false, powerRank: 22),
+                    AIModel(id: "deepseek-reasoner", name: "deepseek-r1", provider: .deepseek, displayName: "DeepSeek R1", description: "Reasoning-focused model with strong analytical capabilities (R1-0528)", supportsImageInput: false, powerRank: 23)
                 ]
             case .ollama:
                 return AppConfig.shared.getOllamaModels()

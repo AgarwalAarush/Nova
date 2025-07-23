@@ -907,6 +907,8 @@ struct APIKeyInputView: View {
             return trimmedKey.hasPrefix("xai-") && trimmedKey.count > 20
         case .gemini:
             return trimmedKey.count > 20
+        case .deepseek:
+            return trimmedKey.hasPrefix("sk-") && trimmedKey.count > 20 // DeepSeek uses OpenAI-compatible format
         case .ollama:
             return true
         }

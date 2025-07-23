@@ -156,6 +156,8 @@ class SettingsViewModel: ObservableObject {
             return key.hasPrefix("xai-") && key.count > 20
         case .gemini:
             return key.count > 20 // Gemini keys vary in format
+        case .deepseek:
+            return key.hasPrefix("sk-") && key.count > 20 // DeepSeek uses OpenAI-compatible format
         case .ollama:
             return true // Ollama doesn't require API keys
         }

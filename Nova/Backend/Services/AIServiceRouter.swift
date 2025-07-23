@@ -132,7 +132,7 @@ class AIServiceRouter: AIService, ObservableObject {
         do {
             let routerResponse = try await promptRouter.routePrompt(message, config: config)
             
-            // If tool calls are identified, execute them using the new executor
+            // Execute identified tool calls
             if !routerResponse.toolCalls.isEmpty {
                 let executionResult = try await toolCallExecutor.executeToolCalls(routerResponse.toolCalls)
                 return executionResult.summary
@@ -335,6 +335,14 @@ class AIServiceRouter: AIService, ObservableObject {
         } else {
             services.removeValue(forKey: .gemini)
         }
+        
+        // DeepSeek
+        let deepSeekKey = config.getApiKey(for: .deepseek)
+        if !deepSeekKey.isEmpty {
+            services[.deepseek] = DeepSeekService(apiKey: deepSeekKey)
+        } else {
+            services.removeValue(forKey: .deepseek)
+        }
     }
     
     private func setupConfigObservers() {
@@ -527,6 +535,8 @@ extension AIServiceRouter {
                 claudeService.clearConversationHistory()
             } else if let mistralService = service as? MistralService {
                 mistralService.clearConversationHistory()
+            } else if let deepseekService = service as? DeepSeekService {
+                deepseekService.clearConversationHistory()
             }
         }
     }
@@ -542,6 +552,8 @@ extension AIServiceRouter {
                 claudeService.setSystemPrompt(prompt)
             } else if let mistralService = service as? MistralService {
                 mistralService.setSystemPrompt(prompt)
+            } else if let deepseekService = service as? DeepSeekService {
+                deepseekService.setSystemPrompt(prompt)
             }
         }
     }
