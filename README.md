@@ -13,6 +13,8 @@
 
 ---
 
+</div>
+
 ## Overview
 
 Nova is a sophisticated macOS AI assistant that combines advanced AI capabilities with comprehensive system automation. Built with SwiftUI and leveraging cutting-edge AI technologies, Nova provides intelligent voice interaction, multi-provider AI routing, and powerful macOS automation through 50+ specialized tools.

@@ -87,7 +87,8 @@ final class PromptRouterTests: XCTestCase {
         XCTAssertEqual(response.estimatedExecutionTime, 5.0)
     }
     
-    func testPromptRouterIntegration() throws {
+    @MainActor
+    func testPromptRouterIntegration() async throws {
         // Test that AIServiceRouter can be initialized with promptRouter
         let aiServiceRouter = AIServiceRouter(config: testConfig)
         
